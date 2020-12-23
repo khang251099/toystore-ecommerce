@@ -1,0 +1,31 @@
+﻿@model IEnumerable<ThuongMaiDienTu.Models.BestSeller_1>
+@{
+    ViewBag.Title = "Best Seller";
+    Layout = null;
+}
+<h3 class="text-center">SẢN PHẨM BÁN CHẠY NHẤT</h3>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-6 col-xs-6 col-md-4">
+            <div class="product-container">
+                <img src="~/Contents/Image/Toy/@item.Images" alt="">
+                <h3>@item.ProductName</h3>
+                <p>Giá: @item.Gia    <a href="/WishList/AddToWishList/@item.IDProduct"><img src="~/Contents/Image/heart.png" style="height:15px;width:15px;"></a></p>
+                <a href="~/Home/Detail/@item.IDProduct" class="btn btn-success">Chi tiết</a>
+                <a onclick="addtocart()" href="/ShoppingCart/AddToCart/@item.IDProduct" class="btn btn-primary">Giỏ hàng</a>
+            </div>
+        </div>
+    }
+    @if (Model.Count() == 0)
+    {
+        <tr>
+            <td style="text-align: center; background-color: #3366cc; color: white; font-weight: bold;font-size: 20px; padding: 10px;" colspan="9">
+                Không tìm thấy kết quả phù hợp.
+            </td>
+        </tr>
+    }
+</div>
+
+

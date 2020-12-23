@@ -1,0 +1,15 @@
+﻿@model IEnumerable<ThuongMaiDienTu.Models.Order>
+@{
+    Layout = null;
+}
+@if (ViewData["Number"].ToString() != "0")
+{
+    <span class="badge" style="background-color: white; color: red; margin-top:-15px">@ViewData["Number"]</span>
+}
+else
+{
+    <span class="badge" style="background-color: white; color: red; margin-top:-15px">Chưa có</span>
+}
+
+
+

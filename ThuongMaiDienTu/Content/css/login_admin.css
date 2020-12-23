@@ -1,0 +1,8 @@
+﻿body {
+}
+
+@media only screen and (max-width: 425px) {
+    input {
+        max-width: 100%;
+    }
+}

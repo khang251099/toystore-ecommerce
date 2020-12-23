@@ -1,0 +1,70 @@
+﻿@model IEnumerable<ThuongMaiDienTu.Models.OrderDetail>
+
+@{
+    ViewBag.Title = "ADMIN | Chi tiết tài khoản";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container">
+    <h1>Lịch sử mua hàng</h1>
+    <table class="table table-striped table-bordered">
+        <tr class="bg-info">
+            <th>
+                Mã đơn hàng
+            </th>
+            <th>
+                Ngày đặt
+            </th>
+            <th>
+                Tên sản phẩm
+            </th>
+            <th>
+                Hình
+            </th>
+            <th>
+                Tổng số sản phẩm
+            </th>
+            <th>
+                Tổng tiền
+            </th>
+            <th>
+                Địa chỉ nhận
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.IDOrder
+                </td>
+                <td>
+                    @item.Order.NgayDat
+                </td>
+                <td>
+                    @item.Product.ProductName
+                </td>
+                <td>
+                    <img src="~/Contents/Image/Toy/@Url.Content(item.Product.Images)" style="height: 50px; width: auto; " id="previewImage" />
+                </td>
+                <td>
+                    @item.Quantity
+                </td>
+                <td>
+                    @item.UnitPrice
+                </td>
+                <td>
+                    @item.Order.DiaChi_Cus
+                </td>
+            </tr>
+        }
+        @if (Model.Count() == 0)
+        {
+            <tr>
+                <td style="text-align: center; background-color: #3366cc; color: white; font-weight: bold;font-size: 20px; padding: 10px;" colspan="9">
+                    Không tìm thấy đơn hàng nào của bạn
+                </td>
+            </tr>
+        }
+    </table>
+</div>

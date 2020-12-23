@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewBag.Title = "FilterOneCate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>jQuery UI Slider - Range slider</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+    @*<script src="~/Content/Assets/Home/js/jquery-ui.js"></script>*@
+    <script>
+        function showProducts(minPrice, maxPrice) {
+            $("#products div").hide().filter(function () {
+                var price = parseInt($(this).data("price"), 10);
+                return price >= minPrice && price <= maxPrice;
+            }).show();
+        }
+    </script>
+
+    <script>
+        $(function () {
+            var options = {
+                range: true,
+                min: 0,
+                max: 500000,
+                values: [0, 500000],
+                slide: function (event, ui) {
+                    var min = ui.values[0],
+                        max = ui.values[1];
+
+                    $("#amount").val("VNĐ   " + min + " - VNĐ" + max);
+                    showProducts(min, max);
+                }
+            }, min, max;
+
+            $("#slider-range").slider(options);
+
+            min = $("#slider-range").slider("values", 0);
+            max = $("#slider-range").slider("values", 1);
+
+            $("#amount").val("VNĐ" + min + " - VNĐ" + max);
+
+            showProducts(min, max);
+        });
+    </script>
+</head>
+<body>
+<div>
+    @Html.Partial("Carousel", "Home")
+    <div class="web_body">
+        <div class="container">
+            <div class="row">
+                <div>
+                    <p>
+                        <label for="amount">Giá:</label>
+                        <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                    </p>
+                    <div id="slider-range"></div>
+                </div>
+                <div class="col-md-9">
+                    <h3 class="text-center">ĐỒ CHƠI BÚP BÊ</h3>
+                    <div class="row">
+                        @foreach (var item in Model)
+                        {
+                            <div class="col-sm-6 col-xs-6 col-md-4">
+                                <div class="product-container">
+                                    <img class="img-responsive" src="~/Contents/Image/Toy/@item.Images" alt="">
+                                    <h3>@item.ProductName</h3>
+                                    <p>Giá: @item.Gia</p>
+                                    <a href="~/Home/Detail/@item.IDProduct" class="btn btn-success">Chi tiết</a>
+                                    <a onclick="addtocart()" href="/ShoppingCart/AddToCart/@item.IDProduct" class="btn btn-primary">Giỏ hàng</a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+

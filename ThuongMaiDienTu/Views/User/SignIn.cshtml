@@ -1,0 +1,86 @@
+﻿@model ThuongMaiDienTu.Models.KhachHang
+@{ 
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+
+    <link href="~/Content/bootstrap-4.3.1-dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/css/Admin_user_login.css" rel="stylesheet" />
+    <link href="~/Content/fontawesome-free-5.11.2-web/css/all.css" rel="stylesheet" />
+
+    <script src="~/Content/css/index.js"></script>
+
+    <link href="~/Content/css/index.css" rel="stylesheet" />
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    
+
+    <script src="~/Content/jquery-3.4.1.min.js"></script>
+    <script src="~/Content/bootstrap-4.3.1-dist/js/bootstrap.js"></script>
+</head>
+<body>
+    <div class="row" style="margin:60px 0">
+        <div class="col-sm-12">
+            <img class="Hinhnen" src="~/Contents/Image/Banner/BG4.png">
+            <div class="hinhvuong"></div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><span class="spandangnhap"><i class="glyphicon glyphicon-log-in"></i> </span>Đăng nhập</h3>
+                </div>
+                <div class="panel-body" style="text-align:-webkit-center;">
+                    <form class="form-horizontal" method="post" role="form" action="">
+
+
+                        <div class="form-group has-feedback">
+                            <label class="control-label col-md-3 col-sm-3 labelTaikhoan">Tài khoản </label>
+                            <div class="col-md-9 col-sm-9">
+                                <input class="form-control nhaptaikhoan"
+                                       name="Email"
+                                       placeholder="Tài khoản"
+                                       autofocus
+                                       required>
+                            </div>
+                        </div>
+
+                        <div class="form-group has-feedback">
+                            <label class="control-label col-sm-3 labelMatkhau">Mật khẩu </label>
+                            <div class="col-sm-9">
+                                <input class="form-control nhapmatkhau"
+                                       type="password"
+                                       name="PasswordKH"
+                                       placeholder="Mật khẩu">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-3 col-sm-8">
+                                <a class="btn btn-danger" href="~/User/Register">Đăng kí</a>
+                                <button type="submit" class="btn btn-primary btnDangnhapUser">
+                                        <span>
+                                             <i class="	glyphicon glyphicon-log-in"></i>
+                                         </span> Đăng nhập
+                                 </button>
+
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

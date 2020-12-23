@@ -1,0 +1,3 @@
+﻿@model ThuongMaiDienTu.Models.Role
+@Html.DropDownListFor(model => model.IDRole, new SelectList(Model.RoleCollection, "IDRole", "RoleName"), "--Chọn quyền--", new { @class = "form-control" })
+

@@ -1,0 +1,79 @@
+﻿@model ThuongMaiDienTu.Models.KhachHang
+
+@{
+    ViewBag.Title = "ADMIN | Cập nhật thông tin tài khoản";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    <h1>Cập nhật thông tin khách hàng</h1>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.HiddenFor(m => m.IDKhachHang)
+                    </div>
+                    <div class="form-group">
+
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                        </div>
+       
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.Phone_Cus, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Phone_Cus, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Phone_Cus, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+
+                            @Html.LabelFor(model => model.PasswordKH, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.PasswordKH, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.PasswordKH, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit" style="display: block; margin: auto">
+                            Save
+                        </button>
+                    </div>
+                </div>
+            }
+
+            <button class="btn">
+                @Html.ActionLink("Trở về", "Index")
+            </button>
+
+            <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+            <script src="~/Scripts/jquery.validate.min.js"></script>
+            <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,60 @@
+
+.nhaptaikhoan{
+    width: 310px;
+}
+.nhapmatkhau{
+    width: 310px;
+}
+.hinhvuong {
+    width: 395px;
+    background: #00adffa3;
+    opacity: 50%;
+    height: 310px;
+    position: absolute;
+    right: 480px;
+    top: -16px;
+}
+h3.panel-title {
+    text-align: center;
+    color: white;
+    font-weight: 600;
+    position: absolute;
+    top: -55px;
+    right: 610px;
+}
+.labelTaikhoan{
+    right: 122px;
+    top: 10px;
+    color: white;
+}
+.labelMatkhau{
+    right: 122px;
+    top: 10px;
+    color: white;
+}
+.Hinhnen{
+    position: absolute;
+    z-index: -999;
+    top: -60px;
+    width: 100%;
+    left: 0px;
+}
+button.btn.btn-primary {
+    top: 35px;
+    position: absolute;
+    right: 450px;
+}
+.btn-danger {
+    width: 100px;
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+    position: absolute;
+    top: 35px;
+    left: 455px;
+ 
+}
+.btnLoginadmin {
+    right: 390px!important;
+    position: absolute!important;
+}

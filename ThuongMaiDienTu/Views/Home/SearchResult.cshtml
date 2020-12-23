@@ -1,0 +1,86 @@
+﻿@model IEnumerable<ThuongMaiDienTu.Models.Product>
+@{
+    ViewBag.Title = "TOYSTORE | Kết quả tìm kiếm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<body>
+    @Html.Partial("Carousel", "Home")
+    <div class="container">
+
+        <h3>Kết quả tìm kiếm: @Model.Count() kết quả</h3>
+        @if (Model.Count() == 0)
+        {
+            <div style="text-align: center; background-color: #3366cc; color: white; font-weight: bold;font-size: 20px; padding: 10px 0 10px 0;">
+                Không tìm thấy sản phẩm phù hợp
+            </div>
+
+            @Html.Action("BestSeller", "Home")
+
+            <div class="row">
+                @Html.Action("Arrival", "Home")
+            </div>
+
+
+        }
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-sm-6 col-xs-6 col-md-4">
+                    <div class="product-container">
+                        @if (item.SoLuong == 0)
+                        {<p class="card_men-sold">Sold out</p>}
+                        @if (item.PromotionPrice != null || item.PromotionPrice > 0)
+                        {<div class="product-sale" style="background-color:red;"><span>SALE</span></div>}
+                        <img src="~/Contents/Image/Toy/@item.Images" alt="">
+                        <h3>@item.ProductName</h3>
+                        @if (item.PromotionPrice == null || item.PromotionPrice <= 0)
+                        {
+                            <p>Giá: @item.Gia </p>
+                        }
+                        else
+                        {
+                            <p>Giá: <span style="color:red">@item.PromotionPrice</span>  <strike>@item.Gia</strike>  </p>
+                        }
+                        <a href="~/Home/Detail/@item.IDProduct" class="btn btn-success">Chi tiết</a>
+                        <a onclick="addtocart()" href="/ShoppingCart/AddToCart/@item.IDProduct" class="btn btn-primary">Giỏ hàng</a>
+                    </div>
+                </div>
+            }
+        </div>
+
+
+    </div>
+
+</body>
+<style>
+    .card_men-sold {
+        min-width: 64px;
+        line-height: 1.2rem;
+        font-weight: 300;
+        position: absolute;
+        font-size: 1.2rem;
+        color: white;
+        background-color: #757272;
+        border-radius: 2px;
+        padding: 4px 7px;
+        top: 5%;
+        right: 10%;
+    }
+
+    .product-sale {
+        right: 16px;
+        color: #fff;
+        position: absolute;
+        top: 0px;
+        font-size: 18px;
+        font-weight: bold;
+        z-index: 9;
+        color: #fff;
+        background: #f00;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+</style>
+

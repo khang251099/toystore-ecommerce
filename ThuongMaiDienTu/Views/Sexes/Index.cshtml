@@ -1,0 +1,31 @@
+﻿@model IEnumerable<ThuongMaiDienTu.Models.Sex>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SexName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SexName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IDSex }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IDSex }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IDSex })
+        </td>
+    </tr>
+}
+
+</table>

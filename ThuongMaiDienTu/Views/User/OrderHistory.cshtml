@@ -1,0 +1,113 @@
+﻿
+@model IEnumerable<ThuongMaiDienTu.Models.OrderDetail>
+@{
+    Layout = null;
+}
+<div class="container">
+    <h4 style="text-align:center;">Đơn hàng của tôi</h4>
+    <div class="col-md-12" style="padding-left: 0;">
+        <a class="btn btn-info" href="@Url.Action("ChuaXacNhan", "User")" style="margin: 30px 0 30px 0">
+            Chưa xác nhận  @Html.Action("CountChuaXacNhan", "User")
+        </a>
+        <a class="btn btn-info" href="@Url.Action("DaXacNhan", "User")" style="margin: 30px 0 30px 0">
+            Đã xác nhận @Html.Action("CountDaXacNhan","User")
+        </a>
+
+        <a class="btn btn-info" href="@Url.Action("DangLayHang", "User")" style="margin: 30px 0 30px 0">
+            Đang lấy hàng @Html.Action("CountDangLayHang","User")
+        </a>
+        <a class="btn btn-info" href="@Url.Action("DangGiao", "User")" style="margin: 30px 0 30px 0">
+            Đang giao hàng @Html.Action("CountDangGiao", "User")
+        
+        </a>
+        <a class="btn btn-info" href="@Url.Action("GiaoHangThanhCong", "User")" style="margin: 30px 0 30px 0">
+            Giao hàng thành công @Html.Action("CountGiaoThanhCong", "User")
+        </a>
+        <a class="btn btn-danger" href="@Url.Action("DaHuy", "User")" style="margin: 30px 0 30px 0">
+            Đã hủy @*@Html.Action("CountDaHuy", "User")*@
+        </a>
+        <br />
+
+    </div>
+
+    <table class="table">
+        <tr>
+            <th>
+                Tên khách hàng
+            </th>
+            <th>
+                Số điện thoại
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Địa chỉ
+            </th>
+            <th>
+                Ngày đặt
+            </th>
+            <th>
+                Trạng thái đơn hàng
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Order.FullName
+                </td>
+                <td>
+                    @item.Order.Phone_Cus
+                </td>
+                <td>
+                    @item.Order.Email
+                </td>
+                <td>
+                    @item.Order.DiaChi_Cus
+                </td>
+                <td>
+                    @item.Order.NgayDat
+                </td>
+                <td>
+                    @item.Order.Status
+                </td>
+                <td>
+
+                    @if (item.Order.Status == "Chưa xác nhận" || item.Order.Status == "Đã xác nhận" || item.Order.Status == "Đang lấy hàng")
+                    {@Html.ActionLink("Chi tiết đơn hàng", "ChiTietDonHang", new { id = item.IDOrder }, new { @class = "btn btn-success btn-sm" })
+                    @Html.ActionLink("Hủy đơn hàng", "CancelOrder", new { id = item.IDOrder }, new { @class = "btn btn-danger btn-sm" })
+
+                }
+                else if (item.Order.Status == "Đã hủy" || item.Order.Status == "Giao hàng thành công")
+                {
+                    @Html.ActionLink("Chi tiết đơn hàng", "ChiTietDonHang", new { id = item.IDOrder }, new { @class = "btn btn-success btn-sm" })
+                }
+                else if (item.Order.Status == "Đang giao")
+                {
+                    @Html.ActionLink("Xác nhận đơn hàng", "XacNhanGium", new { id = item.IDOrder }, new { @class = "btn btn-warning btn-sm" })
+
+                }
+                </td>
+            </tr>
+        }
+        @if (Model.Count() == 0)
+        {
+            <tr>
+                <td style="text-align: center; background-color: #3366cc; color: white; font-weight: bold;font-size: 20px; padding: 10px;" colspan="9">
+                    Không có đơn hàng nào
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+<style>
+    .cancelorder {
+        position: absolute;
+        margin-left: 5px;
+    }
+</style>

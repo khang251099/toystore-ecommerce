@@ -1,0 +1,70 @@
+﻿
+@model IEnumerable<ThuongMaiDienTu.Models.OrderDetail>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <div class="">
+        <ol class="breadcrumb">
+            <li>
+                <i class="fas fa-home"></i> <a href="@Url.Action("Index","Home")">Trang chủ</a>
+            </li>
+            <li>
+                <i class="fas fa-info-circle"></i> Lịch sử mua hàng
+            </li>
+        </ol>
+        <div class="">
+            <h1 class="page-header" style="text-align:center;">
+                Lịch sử mua hàng
+            </h1>
+
+        </div>
+    </div>
+<div class="container">
+
+    <table class="table table-striped table-bordered">
+        <tr class="bg-info">
+            <th>
+                Mã đơn hàng
+            </th>
+            <th>
+                Ngày mua
+            </th>
+            <th>
+                Tên sản phẩm
+            </th>
+            <th>Hình sản phẩm</th>
+          
+          
+            <th>
+                Tổng tiền
+            </th>
+            <th>
+                Địa chỉ
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IDOrder)
+        </td>
+        <td>
+            @item.Order.NgayDat
+        </td>
+        <td>
+            @item.Product.ProductName
+        </td>
+        <td> <img src="~/Contents/Image/Toy/@item.Product.Images" style="height: 100px; width: auto; " id="previewImage" />
+        </td>
+        <td>
+            @item.Order.ThanhTien
+        </td>
+        <td>
+            @item.Order.DiaChi_Cus
+        </td>
+
+    </tr>
+        }
+    </table>
+</div>

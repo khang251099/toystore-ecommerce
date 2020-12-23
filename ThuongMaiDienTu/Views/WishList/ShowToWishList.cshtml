@@ -1,0 +1,120 @@
+﻿@model ThuongMaiDienTu.Models.WishList
+
+@{
+    ViewBag.Title = "ShowToWishList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <style>
+        input {
+            border-radius: 3px;
+            margin-top: 2px;
+        }
+
+        button {
+            margin-top: 2px;
+        }
+
+        .btnUpdate {
+            background-color: white;
+            color: orangered;
+            border-color: orangered;
+            border-radius: 3px
+        }
+    </style>
+</head>
+
+<div class="">
+    <div class="">
+        <ol class="breadcrumb">
+            <li>
+                <i class="fas fa-home"></i> <a href="@Url.Action("Index","Home")">Trang chủ </a>
+            </li>
+            <li>
+                <i class="fas fa-cart-plus"></i>Sản phẩm yêu thích
+            </li>
+        </ol>
+        <h1 class="page-header" style="text-align:center; font-weight:bold;">
+            Danh sách sản phẩm yêu thích
+        </h1>
+
+    </div>
+</div>
+<br />
+<div class="container bodyGiohang">
+    <div class="col-sm-12">
+        @if (Model.Total_Quantity() != 0)
+        {
+
+            <div class="row">
+                @foreach (var item in Model.Items)
+                {
+                    <div class="col-sm-6 col-xs-6 col-md-4">
+                        <div class="product-container">
+                            @if (item._shopping_product.PromotionPrice != item._shopping_product.Gia)
+                            {<div class="product-sale" style="background-color:red;"><span>SALE</span></div>}
+                            <img src="~/Contents/Image/Toy/@item._shopping_product.Images" alt="">
+                            <h3>@item._shopping_product.ProductName</h3>
+                            @if (item._shopping_product.PromotionPrice == item._shopping_product.Gia || item._shopping_product.PromotionPrice <= 0)
+                            {
+                        <p>Giá: @item._shopping_product.Gia <a href="/WishList/RemoveWishList/@item._shopping_product.IDProduct"><i class="fas fa-trash-alt" style="height:15px;width:15px;color:red"></i></a> </p>
+                            }
+                            else
+                            {
+                                <p>Giá: <span style="color:red">@item._shopping_product.PromotionPrice</span>  <strike>@item._shopping_product.Gia</strike> <a href="/WishList/RemoveWishList/@item._shopping_product.IDProduct"><i class="fas fa-trash-alt" style="height:15px;width:15px;color:red"></i></a> </p>
+                            }
+                            <a href="~/Home/Detail/@item._shopping_product.IDProduct" class="btn btn-success">Chi tiết</a>
+                            <a onclick="addtocart()" href="/ShoppingCart/AddToCart/@item._shopping_product.IDProduct" class="btn btn-primary">Giỏ hàng</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+
+            <hr />
+            <h3 class="text-center" style="text-align:center;">Danh sách sản phẩm yêu thích trống!!!</h3>
+            <hr />
+
+        }
+
+
+        <br />
+        </div>
+    </div>
+        <style>
+
+
+            .card_men-sold {
+                min-width: 64px;
+                line-height: 1.2rem;
+                font-weight: 300;
+                position: absolute;
+                font-size: 1.2rem;
+                color: white;
+                background-color: #757272;
+                border-radius: 2px;
+                padding: 4px 7px;
+                top: 5%;
+                right: 10%;
+            }
+
+            .product-sale {
+                right: 16px;
+                color: #fff;
+                position: absolute;
+                top: 0px;
+                font-size: 18px;
+                font-weight: bold;
+                z-index: 9;
+                color: #fff;
+                background: #f00;
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+                line-height: 50px;
+            }
+            
+        </style>

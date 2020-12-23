@@ -1,0 +1,23 @@
+﻿@model IEnumerable<ThuongMaiDienTu.Models.Product>
+@{
+    ViewBag.Title = "Arrival";
+    Layout = null;
+}
+<h3 class="text-center">SẢN PHẨM BÁN CHẠY NHẤT</h3>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-6 col-xs-6 col-md-4">
+            <div class="product-container">
+                <img class="img-responsive" src="~/Contents/Image/Toy/@item.Images" alt="">
+                <h3>@item.ProductName</h3>
+                <p>Giá: @item.Gia</p>
+                <a href="~/Home/Detail/@item.IDProduct" class="btn btn-success">Chi tiết</a>
+                <a onclick="addtocart()" href="/ShoppingCart/AddToCart/@item.IDProduct" class="btn btn-primary">Giỏ hàng</a>
+            </div>
+        </div>
+    }
+</div>
+
+

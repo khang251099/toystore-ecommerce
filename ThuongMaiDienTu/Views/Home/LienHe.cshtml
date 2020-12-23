@@ -1,0 +1,99 @@
+﻿@model ThuongMaiDienTu.Models.LienHe
+
+@{
+    ViewBag.Title = "CalasuStore | Liên hệ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<body>
+    <div class="container">
+        <h1 style="text-align:center">Liên hệ</h1>
+        <img src="~/Contents/Image/Banner/cccw-contact-banner.jpg" style="width:100%" />
+
+        <hr />
+        <div class="col-md-6">
+            <div class="map-responsive">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7838.681858938223!2d106.66534657141115!3d10.785178871225193!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x33ec617b79a69949!2zVHLGsOG7nW5nIMSQ4bqhaSBI4buNYyBOZ2_huqFpIE5n4buvIC0gVGluIEjhu41jIFRQLiBIQ00!5e0!3m2!1svi!2sus!4v1589901264167!5m2!1svi!2sus" frameborder="1" style="border:0;width:100%;height:650px" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+            </div>
+        </div>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @if (Session["IDUser"] != null)
+        {
+            <div class="col-md-6">
+                <div>
+                    <ul class="list-group">
+                        <li class="list-group-item active" style="font-size: 25px; font-weight: bold; text-align: center">Hình thức khác</li>
+                        <li class="list-group-item" style="font-size: 15px">
+                            <i style="margin-right: 20px" class="fas fa-mail-bulk"></i>
+                            <b>Gửi câu hỏi về email: hotro@calasutoy.com</b>
+                        </li>
+                        <li class="list-group-item" style="font-size: 15px">
+                            <i style="margin-right: 20px" class="fab fa-facebook-f"></i>
+                            <b>Gửi câu hỏi thông qua Facebook chính thức của CalasuToy</b>
+                        </li>
+                        <li class="list-group-item" style="font-size: 15px">
+                            <i style="margin-right: 20px" class="fas fa-phone"></i>
+                            <b>Gọi trực tiếp đến Hotline: 0123456789</b>
+                        </li>
+                        <li class="list-group-item" style="font-size: 15px">
+                            <i style="margin-right: 20px" class="fas fa-building"></i>
+                            <b>Tại văn phòng CalasuToy: 828 Sư Vạn Hạnh, P12, Q10, TP.HCM</b>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+
+
+                <label>Chủ đề</label>
+                <input class="textboxcart4" name="ChuDe" type="text" placeholder="Nhập chủ đề">
+
+                <label>Nội dung</label>
+                <input class="textboxcart4" name="NoiDung" type="text" placeholder="Nhập nội dung">
+                <div class="col-md-6"></div>
+                    <input type="submit" value="Gửi liên hệ" class=" btn btn-primary" />
+               
+            </div>
+        }
+        else
+        {
+            <div class="col-md-6">
+                <div>
+                    <ul class="list-group">
+                        <li class="list-group-item active" style="font-size: 25px; font-weight: bold; text-align: center">Hình thức khác</li>
+                        <li class="list-group-item" style="font-size: 15px">
+                            <i style="margin-right: 20px" class="fas fa-mail-bulk"></i>
+                            <b>Gửi câu hỏi về email: hotro@calasutoy.com</b>
+                        </li>
+                        <li class="list-group-item" style="font-size: 15px">
+                            <i style="margin-right: 20px" class="fab fa-facebook-f"></i>
+                            <b>Gửi câu hỏi thông qua Facebook chính thức của CalasuToy</b>
+                        </li>
+                        <li class="list-group-item" style="font-size: 15px">
+                            <i style="margin-right: 20px" class="fas fa-phone"></i>
+                            <b>Gọi trực tiếp đến Hotline: 0123456789</b>
+                        </li>
+                        <li class="list-group-item" style="font-size: 15px">
+                            <i style="margin-right: 20px" class="fas fa-building"></i>
+                            <b>Tại văn phòng CalasuToy: 828 Sư Vạn Hạnh, P12, Q10, TP.HCM</b>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <p>Bạn cần đăng nhập để có thể gửi liên hệ</p>
+                <a href="~/User/SignIn" class="btn btn-primary">Đăng nhập</a>
+            </div>
+        }
+
+    </div>
+        }
+        <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+        <script src="~/Scripts/jquery.validate.min.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    </div>
+</body>

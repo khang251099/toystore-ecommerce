@@ -1,0 +1,53 @@
+﻿@model ThuongMaiDienTu.Models.KhachHang
+
+@{
+    ViewBag.Title = "ADMIN | Xóa tài khoản";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container">
+    <h1>Thông tin tài khoản</h1>
+    <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <table class="table table-striped table-bordered">
+                    <tr>
+                        Tên khách hàng
+                        <td>@Html.DisplayFor(model => model.FullName)</td>
+                    </tr>
+                
+                    <tr>
+                       Số điện thoại
+                        <td>@Html.DisplayFor(model => model.Phone_Cus)</td>
+                    </tr>
+                    <tr>
+                        Email
+                        <td>@Html.DisplayFor(model => model.Email)</td>
+                    </tr>
+                    <tr>
+                        Mật khẩu
+                        <td>@Html.DisplayFor(model => model.PasswordKH)</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: center">
+                            <button class="btn btn-default" style="width: 200px; margin-top: 20px">
+                                Xoá
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            }
+        </div>
+    </div>
+    <button style="display: block; margin:auto" class="btn">@Html.ActionLink("Hủy", "Index")</button>
+    <div>
+        @Html.Action("OrderHistory", "Customer")
+    </div>
+</div>
+
+<div>
+
+</div>

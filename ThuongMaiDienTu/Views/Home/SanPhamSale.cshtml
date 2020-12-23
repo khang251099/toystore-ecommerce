@@ -1,0 +1,65 @@
+﻿@model IEnumerable<ThuongMaiDienTu.Models.Product>
+@{
+    ViewBag.Title = "Arrival";
+    Layout = null;
+}
+<h2 class="text-center" style="color:red;font-weight:bold;">SẢN PHẨM SALE</h2>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-6 col-xs-6 col-md-4">
+            <div class="product-container">
+
+                <div class="product-sale" style="background-color:red;"><span>SALE</span></div>
+                <img src="~/Contents/Image/Toy/@item.Images" alt="">
+                <h3>@item.ProductName</h3>
+                @if (item.PromotionPrice == item.Gia || item.PromotionPrice <= 0)
+                {
+                    <p>Giá: @item.Gia    <a href="/WishList/AddToWishList/@item.IDProduct"><img src="~/Contents/Image/heart.png" style="height:15px;width:15px;"></a></p>
+                }
+                else
+                {
+                    <p>Giá: <span style="color:red">@item.PromotionPrice</span>  <strike>@item.Gia</strike> <a href="/WishList/AddToWishList/@item.IDProduct"><img src="~/Contents/Image/heart.png" style="height:15px;width:15px;"></a>  </p>
+                }
+                <a href="~/Home/Detail/@item.IDProduct" class="btn btn-success">Chi tiết</a>
+                <a onclick="addtocart()" href="/ShoppingCart/AddToCart/@item.IDProduct" class="btn btn-primary">Giỏ hàng</a>
+            </div>
+        </div>
+    }
+
+</div>
+<style>
+    .product-sale {
+        right: 16px;
+        color: #fff;
+        position: absolute;
+        top: 0px;
+        font-size: 18px;
+        font-weight: bold;
+        z-index: 9;
+        color: #fff;
+        background: #f00;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+    }
+
+
+    .card_men-sold {
+        min-width: 64px;
+        line-height: 1.2rem;
+        font-weight: 300;
+        position: absolute;
+        font-size: 1.2rem;
+        color: white;
+        background-color: #757272;
+        border-radius: 2px;
+        padding: 4px 7px;
+        top: 5%;
+        right: 10%;
+    }
+</style>
+
+

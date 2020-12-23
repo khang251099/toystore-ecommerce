@@ -1,0 +1,55 @@
+.formDangky_user{
+    text-align: center;
+    left: 60px;
+    position: relative;
+}
+input#username {
+    width: 390px;
+    margin-bottom: 30px;
+}
+input#email {
+    width: 390px;
+    margin-bottom: 30px;
+}
+input#Phone {
+    width: 390px;
+    margin-bottom: 30px;
+}
+input#DiaChi_Cus {
+    width: 390px;
+    margin-bottom: 30px;
+}
+input#password {
+    width: 390px;
+    margin-bottom: 30px;
+}
+input#password_confirm {
+    width: 390px;
+    margin-bottom: 30px;
+}
+label.control-label {
+    position: absolute;
+    left: 205px;
+}
+.Hinhnen_dangky {
+    position: absolute;
+    z-index: -999;
+    top: -60px;
+    width: 1521px;
+    left: -190px;
+}
+legend {
+    color: white;
+    font-weight: 400;
+}
+button.btn.btn-success {
+    right: 425px;
+    width: 100px;
+
+    position: absolute;
+}
+button.btn.btn-danger {
+    right: 580px;
+    width: 100px;
+    position: absolute;
+}

@@ -1,0 +1,113 @@
+﻿@using ThuongMaiDienTu.Models;
+@using PagedList.Mvc;
+@using PagedList;
+
+@model PagedList.IPagedList<ThuongMaiDienTu.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="container">
+    <h1>Danh sách sản phẩm</h1>
+    <div style="padding: 15px;">
+        <div class="row thumbnail" style="padding: 30px">
+            <div class="col-md-6">
+                <button class="btn btn-success">
+                    @Html.ActionLink("Thêm sản phẩm", "Create")
+                </button>
+            </div>
+            <div class="col-md-6">
+                @using (Html.BeginForm("Index", "Products"))
+                {
+                    <div class="col-md-9">
+                        @Html.TextBox("search", "", new { placeholder = "Enter something...", @class = "form-control" })
+
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-danger">Tìm kiếm</button>
+                    </div>
+                    <div class="col-md-1">
+                        <a class="btn" href="@Url.Action("Index", "Products")"></a>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+    <table class="table">
+        <tr>
+            <th>
+                Mã sản phẩm
+            </th>
+            <th>
+                Tên sản phẩm
+            </th>
+
+            <th>
+                Ảnh đại diện sản phẩm
+            </th>
+            <th>
+                Số lượng
+            </th>
+            <th>
+                Giá sản phẩm
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IDProduct)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+
+                <td>
+                    <img src="~/Contents/Image/Toy/@item.Images" style="height: 50px; width: auto" />
+                </td>
+
+                <td>
+                    @{ var quantity = item.SoLuong;
+
+                    }
+
+                    @if (quantity == 0)
+                    {
+                        @Html.ActionLink("+", "Edit", new { id = item.IDProduct }, new { @class = "btn btn-primary  " })
+                    }
+                    else
+                    {
+                        @item.SoLuong
+                    }
+                </td>
+                <td>
+                    @item.Gia
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.IDProduct }, new { @class = "btn btn-primary  " })
+                    @Html.ActionLink("Details", "Details", new { id = item.IDProduct }, new { @class = "btn btn-success  " })
+                    @if (Session["AdminID"] != null && Session["AdminRole"] != null && Session["AdminRole"].ToString() == "1")
+                    {
+                        @Html.ActionLink("Delete", "Delete", new { id = item.IDProduct }, new { @class = "btn btn-danger  " })
+                    }
+                </td>
+            </tr>
+        }
+        @if (Model.Count() == 0)
+        {
+            <tr>
+                <td style="text-align: center; background-color: #3366cc; color: white; font-weight: bold;font-size: 20px; padding: 10px;" colspan="9">
+                    Không tìm thấy kết quả phù hợp.
+                </td>
+            </tr>
+        }
+    </table>
+    <div class="text-center">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+    </div>
+</div>
+

@@ -1,0 +1,11 @@
+﻿@model IEnumerable<ThuongMaiDienTu.Models.BestSeller_1>
+@foreach (var item in Model.Take(1))
+{
+    <div class="thumbnail text-center" style="font-weight: bold">
+        <h3>SẢN PHẨM CÓ DOANH THU CAO NHẤT</h3>
+        <img src="~/Contents/Image/Toy/@item.Images" style="height: 100px; width: auto; margin-bottom: 20px;" />
+        <p>@Html.DisplayFor(s => item.ProductName)</p>
+        <p>Số lượng: @Html.DisplayFor(s => item.BestSell)</p>
+        <p style="color: red">Doanh thu: @Html.DisplayFor(s => item.ThuVe) <sup>VNĐ</sup></p>
+    </div>
+}

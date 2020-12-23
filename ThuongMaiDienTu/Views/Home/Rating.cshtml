@@ -1,0 +1,23 @@
+﻿@model ThuongMaiDienTu.Models.DanhGia
+@{
+    Layout = null;
+}
+
+<div>
+    @using (Html.BeginForm("Rating", "Home", FormMethod.Post))
+    {
+        if (Session["IDUser"] == null)
+        {
+            <p>Để bình luận bạn cần đăng nhập!</p>
+            <a href="~/User/SignIn" class="btn btn-primary">Đăng nhập</a>
+        }
+        else
+        {
+            <form>
+                <p style="font-weight: bold">Nội dung</p>
+                <input name="content" type="text" placeholder="Enter something..." />
+                <input type="submit" value="Bình luận" class="btn btn-warning" />
+            </form>
+        }
+    }
+</div>

@@ -1,0 +1,205 @@
+﻿@model IEnumerable<ThuongMaiDienTu.Models.OrderDetail>
+
+@{
+    ViewBag.Title = "ADMIN| Chi tiết đơn hàng";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+}
+
+<div class="container" style="font-size: 16px">
+    <div class="row">
+        <div class="thumbnail" style="padding: 20px">
+            <h1 style="text-align:center">
+                Chi tiết đơn hàng
+            </h1>
+            <br />
+            <div class="col-md-4">
+                <table class="table table-hover table-bordered">
+                    @foreach (var item in Model.Take(1))
+                    {
+                        <tr>
+                            <th>
+                                Mã đơn hàng
+                            </th>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Order.IDOrder)
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <th>
+                                Tên khách hàng
+                            </th>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Order.FullName)
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <th>
+                                Số điện thoại
+                            </th>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Order.Phone_Cus)
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <th>
+                                Địa chỉ
+                            </th>
+                            <td>
+                                @Html.DisplayFor(model => item.Order.DiaChi_Cus)
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <th>
+                                Ngày
+                            </th>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Order.NgayDat)
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                SĐT
+                            </th>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Order.Phone_Cus)
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <th>
+                                Hình thức thanh toán
+                            </th>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Order.MethodName)
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <th>
+                                Tình trạng đơn hàng
+                            </th>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Order.Status)
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <th>
+                                Tình trạng thanh toán
+                            </th>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Order.StatusPayment)
+                            </td>
+
+                        </tr>
+
+                    }
+                </table>
+            </div>
+            <div class="col-md-8">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr class="bg-info">
+
+                            <th>
+                                Mã sản phẩm
+                            </th>
+                            <th>
+                                Tên sản phẩm
+                            </th>
+                            <th>
+                                Hình sản phẩm
+                            </th>
+                            <th>
+                                Số lượng
+                            </th>
+                            <th>
+                                Đơn giá
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Product.IDProduct)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Product.ProductName)
+                                </td>
+                                <td>
+                                    <img src="~/Contents/Image/Toy/@item.Product.Images" style="height: 100px; width: auto; " id="previewImage" />
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Quantity)
+                                </td>
+                                <td>
+                                    @if (item.Product.PromotionPrice == null || item.Product.PromotionPrice <= 0)
+                                    {@Html.DisplayFor(modelItem => item.Product.Gia)}
+                                else
+                                {
+                                    @Html.DisplayFor(modelItem => item.Product.PromotionPrice)
+                                }
+
+                                </td>
+                                @*<td>
+                                        @Html.DisplayFor(modelItem => item.Order.Status)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Order.StatusPayment)
+                                    </td>*@
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+                <table class="table table-hover">
+                    @foreach (var item in Model.Take(1))
+                    {
+                        <tr>
+                            <td>Tiền ship:</td>
+                            <td colspan="6"></td>
+                            <td style=" font-size: 20px;"> @item.Order.PhiShip VNĐ </td>
+
+                        </tr>
+                        <tr>
+                            <td>Tiền thuế:</td>
+                            <td colspan="6"></td>
+                            <td style=" font-size: 20px;">  @item.Order.ThueVAT VNĐ </td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <td>Giảm giá:</td>
+                            <td colspan="6"></td>
+                            <td style=" font-size: 20px;"> @item.Order.GiamGia VNĐ </td>
+
+                        </tr>
+                        <tr>
+                            <td>Thành tiền:</td>
+                            <td colspan="6"></td>
+                            <td style="color: red; font-weight: bold; font-size: 20px;">
+                                @item.Order.ThanhTien
+                            </td>
+
+                        </tr>
+
+
+                    }
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+@*<div class="container">
+        <button class="btn" style="display: block; margin: auto">
+            @Html.ActionLink("Trở về", "Index","Home")
+        </button>
+    </div>*@

@@ -1,0 +1,54 @@
+﻿@model ThuongMaiDienTu.Models.LienHe
+
+@{
+    ViewBag.Title = "TOYSTORE | Chi tiết";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="container">
+    <div class="col-md-offset-2 col-md-8">
+        <h1>Chi tiết liên hệ</h1>
+        <table class="table table-striped table-bordered">
+            <tr>
+
+                <td>Mã liên hệ</td>
+                <td>@Html.DisplayFor(model => model.IDLienHe)</td>
+            </tr>
+            <tr>
+                <td width="30%">Ngày liên hệ
+                <td>@Html.DisplayFor(model => model.NgayLienHe)</td>
+            </tr>
+            <tr>
+                <td>Khách hàng</td>
+                <td>@Html.DisplayFor(model => model.KhachHang.FullName) 
+            </tr>
+            <tr>
+                <td>Email</td> 
+                <td>@Html.DisplayFor(model => model.KhachHang.Email)</td>
+            </tr>
+            <tr>
+                <td>Số điện thoại</td>
+                <td>@Html.DisplayFor(model => model.KhachHang.Phone_Cus)</td>
+            </tr>
+            <tr>
+                <td>Chủ đề</td> 
+                <td>@Html.DisplayFor(model => model.ChuDe)</td>
+            </tr>
+            <tr>
+                <td>Nội dung</td>
+                <td>@Html.DisplayFor(model => model.NoiDung)</td>
+            </tr>
+
+        </table>
+
+    </div>
+</div>
+<div class="container">
+    <div class="col-md-6"></div>
+    <div>
+        @if (Model.Status == "Chưa phản hồi")
+        {
+            @Html.ActionLink("Phản hồi thư", "ConfirmedMess", new { id = Model.IDLienHe }, new { @class = "btn btn-success btn-sm" })
+        }
+    </div>
+
+</div>

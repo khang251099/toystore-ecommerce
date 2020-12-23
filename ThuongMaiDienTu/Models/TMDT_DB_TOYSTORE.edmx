@@ -1,0 +1,1511 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TOYSTORE_MODELModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Administrator">
+          <Key>
+            <PropertyRef Name="IDAdmin" />
+          </Key>
+          <Property Name="IDAdmin" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone_Admin" Type="varchar" MaxLength="11" />
+          <Property Name="PasswordAdmin" Type="nvarchar" MaxLength="50" />
+          <Property Name="IDRole" Type="int" />
+        </EntityType>
+        <EntityType Name="Age">
+          <Key>
+            <PropertyRef Name="IDAge" />
+          </Key>
+          <Property Name="IDAge" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AgeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Image" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Brand">
+          <Key>
+            <PropertyRef Name="IDBrand" />
+          </Key>
+          <Property Name="IDBrand" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BrandName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Image" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="IDCate" />
+          </Key>
+          <Property Name="IDCate" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CateName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="DanhGia">
+          <Key>
+            <PropertyRef Name="IDDanhGia" />
+          </Key>
+          <Property Name="IDDanhGia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DanhGia" Type="nvarchar" MaxLength="500" />
+          <Property Name="IDProduct" Type="int" />
+          <Property Name="IDKhachHang" Type="int" />
+          <Property Name="NgayDanhGia" Type="datetime" />
+          <Property Name="Content" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="GioHang">
+          <Key>
+            <PropertyRef Name="IDGioHang" />
+          </Key>
+          <Property Name="IDGioHang" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDProduct" Type="int" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="100" />
+          <Property Name="IDKhachHang" Type="int" />
+          <Property Name="SoLuong" Type="int" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Price" Type="int" />
+          <Property Name="TongTien" Type="int" />
+          <Property Name="TongSanPham" Type="int" />
+        </EntityType>
+        <EntityType Name="HopThu">
+          <Key>
+            <PropertyRef Name="IDHopThu" />
+          </Key>
+          <Property Name="IDHopThu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDKhachHang" Type="int" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="SendText" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="KhachHang">
+          <Key>
+            <PropertyRef Name="IDKhachHang" />
+          </Key>
+          <Property Name="IDKhachHang" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="PasswordKH" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone_Cus" Type="varchar" MaxLength="11" />
+          <Property Name="DiaChi_Cus" Type="nvarchar" MaxLength="50" />
+          <Property Name="RankID" Type="int" />
+          <Property Name="RankName" Type="nvarchar" MaxLength="50" />
+          <Property Name="PointKH" Type="int" />
+        </EntityType>
+        <EntityType Name="LienHe">
+          <Key>
+            <PropertyRef Name="IDLienHe" />
+          </Key>
+          <Property Name="IDLienHe" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NoiDung" Type="nvarchar" MaxLength="500" />
+          <Property Name="IDKhachHang" Type="int" />
+          <Property Name="NgayLienHe" Type="datetime" />
+          <Property Name="ChuDe" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="IDOrderDetail" />
+          </Key>
+          <Property Name="IDOrderDetail" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDOrder" Type="int" />
+          <Property Name="IDProduct" Type="int" />
+          <Property Name="UnitPrice" Type="int" />
+          <Property Name="Quantity" Type="int" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="IDOrder" />
+          </Key>
+          <Property Name="IDOrder" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NgayDat" Type="datetime" />
+          <Property Name="IDKhachHang" Type="int" />
+          <Property Name="IDMethod" Type="int" />
+          <Property Name="Address_Cus" Type="nvarchar" MaxLength="100" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone_Cus" Type="varchar" MaxLength="11" />
+          <Property Name="GhiChu" Type="nvarchar" MaxLength="100" />
+          <Property Name="PhiShip" Type="int" />
+          <Property Name="IDGioHang" Type="int" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="50" />
+          <Property Name="DiaChi_Cus" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="MethodName" Type="nchar" MaxLength="50" />
+          <Property Name="StatusPayment" Type="nvarchar" MaxLength="50" />
+          <Property Name="PaypalAmount" Type="float" />
+          <Property Name="GiamGia" Type="float" />
+          <Property Name="ThueVAT" Type="float" />
+          <Property Name="TongTien" Type="float" />
+          <Property Name="ThanhTien" Type="float" />
+        </EntityType>
+        <EntityType Name="PayMethod">
+          <Key>
+            <PropertyRef Name="IDMethod" />
+          </Key>
+          <Property Name="IDMethod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MethodName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="IDProduct" />
+          </Key>
+          <Property Name="IDProduct" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="100" />
+          <Property Name="NgayNhap" Type="datetime" />
+          <Property Name="ViewCount" Type="int" />
+          <Property Name="MoTa" Type="nvarchar" MaxLength="1000" />
+          <Property Name="PromotionPrice" Type="int" />
+          <Property Name="MaSP" Type="nvarchar" MaxLength="50" />
+          <Property Name="ChuDe" Type="nvarchar" MaxLength="50" />
+          <Property Name="XuatXu" Type="nvarchar" MaxLength="50" />
+          <Property Name="Images" Type="nvarchar" MaxLength="500" />
+          <Property Name="Image1" Type="nvarchar" MaxLength="500" />
+          <Property Name="Image2" Type="nvarchar" MaxLength="500" />
+          <Property Name="Image3" Type="nvarchar" MaxLength="500" />
+          <Property Name="Image4" Type="nvarchar" MaxLength="500" />
+          <Property Name="SoLuong" Type="int" />
+          <Property Name="KichThuoc" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="Gia" Type="int" />
+          <Property Name="IDSex" Type="int" />
+          <Property Name="IDCate" Type="int" />
+          <Property Name="IDBrand" Type="int" />
+          <Property Name="IDAge" Type="int" />
+        </EntityType>
+        <EntityType Name="RankKH">
+          <Key>
+            <PropertyRef Name="RankID" />
+          </Key>
+          <Property Name="RankID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RankName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="IDRole" />
+          </Key>
+          <Property Name="IDRole" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SanPhamKhuyenMai">
+          <Key>
+            <PropertyRef Name="MaKhuyenMai" />
+          </Key>
+          <Property Name="MaKhuyenMai" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDProduct" Type="int" />
+          <Property Name="MoTa" Type="nvarchar" MaxLength="500" />
+          <Property Name="Discount" Type="int" />
+        </EntityType>
+        <EntityType Name="Sex">
+          <Key>
+            <PropertyRef Name="IDSex" />
+          </Key>
+          <Property Name="IDSex" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SexName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Shipping">
+          <Key>
+            <PropertyRef Name="IDShip" />
+          </Key>
+          <Property Name="IDShip" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDOrder" Type="int" />
+          <Property Name="ShipName" Type="nvarchar" MaxLength="100" />
+          <Property Name="IDKhachHang" Type="int" />
+          <Property Name="ShippingDate" Type="datetime" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="VoteLog">
+          <Key>
+            <PropertyRef Name="AutoId" />
+          </Key>
+          <Property Name="AutoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SectionID" Type="smallint" />
+          <Property Name="VoteForId" Type="int" />
+          <Property Name="Vote" Type="smallint" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="IDKhachHang" Type="int" />
+          <Property Name="IDProduct" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TOYSTORE_MODEL.dbo.BestSeller_1' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="BestSeller_1">
+          <Key>
+            <PropertyRef Name="IDProduct" />
+          </Key>
+          <Property Name="IDProduct" Type="int" Nullable="false" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Gia" Type="int" />
+          <Property Name="Images" Type="nvarchar" MaxLength="500" />
+          <Property Name="BestSell" Type="int" />
+          <Property Name="ThuVe" Type="int" />
+        </EntityType>
+        <Association Name="FK__Administr__IDRol__145C0A3F">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Administrator" Type="Self.Administrator" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="IDRole" />
+            </Principal>
+            <Dependent Role="Administrator">
+              <PropertyRef Name="IDRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DanhGia__IDKhach__24927208">
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
+          <End Role="DanhGia" Type="Self.DanhGia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="IDKhachHang" />
+            </Principal>
+            <Dependent Role="DanhGia">
+              <PropertyRef Name="IDKhachHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DanhGia__IDProdu__25869641">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="DanhGia" Type="Self.DanhGia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="IDProduct" />
+            </Principal>
+            <Dependent Role="DanhGia">
+              <PropertyRef Name="IDProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GioHang__IDKhach__2A4B4B5E">
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
+          <End Role="GioHang" Type="Self.GioHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="IDKhachHang" />
+            </Principal>
+            <Dependent Role="GioHang">
+              <PropertyRef Name="IDKhachHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GioHang__IDProdu__2B3F6F97">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="GioHang" Type="Self.GioHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="IDProduct" />
+            </Principal>
+            <Dependent Role="GioHang">
+              <PropertyRef Name="IDProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__KhachHang__RankI__02FC7413">
+          <End Role="RankKH" Type="Self.RankKH" Multiplicity="0..1" />
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RankKH">
+              <PropertyRef Name="RankID" />
+            </Principal>
+            <Dependent Role="KhachHang">
+              <PropertyRef Name="RankID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LienHe__IDKhachH__2E1BDC42">
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
+          <End Role="LienHe" Type="Self.LienHe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="IDKhachHang" />
+            </Principal>
+            <Dependent Role="LienHe">
+              <PropertyRef Name="IDKhachHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderDeta__IDOrd__34C8D9D1">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="IDOrder" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="IDOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderDeta__IDPro__35BCFE0A">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="IDProduct" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="IDProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__IDGioHan__47DBAE45">
+          <End Role="GioHang" Type="Self.GioHang" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GioHang">
+              <PropertyRef Name="IDGioHang" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="IDGioHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__IDKhachH__30F848ED">
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="IDKhachHang" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="IDKhachHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__IDMethod__31EC6D26">
+          <End Role="PayMethod" Type="Self.PayMethod" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PayMethod">
+              <PropertyRef Name="IDMethod" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="IDMethod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__IDAge__21B6055D">
+          <End Role="Age" Type="Self.Age" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Age">
+              <PropertyRef Name="IDAge" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="IDAge" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__IDBrand__1FCDBCEB">
+          <End Role="Brand" Type="Self.Brand" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brand">
+              <PropertyRef Name="IDBrand" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="IDBrand" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__IDCate__1ED998B2">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="IDCate" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="IDCate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__IDSex__20C1E124">
+          <End Role="Sex" Type="Self.Sex" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sex">
+              <PropertyRef Name="IDSex" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="IDSex" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SanPhamKh__IDPro__6FE99F9F">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="SanPhamKhuyenMai" Type="Self.SanPhamKhuyenMai" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="IDProduct" />
+            </Principal>
+            <Dependent Role="SanPhamKhuyenMai">
+              <PropertyRef Name="IDProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Shipping__IDOrde__38996AB5">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+          <End Role="Shipping" Type="Self.Shipping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="IDOrder" />
+            </Principal>
+            <Dependent Role="Shipping">
+              <PropertyRef Name="IDOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VoteLog__IDKhach__74AE54BC">
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
+          <End Role="VoteLog" Type="Self.VoteLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="IDKhachHang" />
+            </Principal>
+            <Dependent Role="VoteLog">
+              <PropertyRef Name="IDKhachHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VoteLog__IDProdu__75A278F5">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="VoteLog" Type="Self.VoteLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="IDProduct" />
+            </Principal>
+            <Dependent Role="VoteLog">
+              <PropertyRef Name="IDProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TOYSTORE_MODELModelStoreContainer">
+          <EntitySet Name="Administrator" EntityType="Self.Administrator" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Age" EntityType="Self.Age" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DanhGia" EntityType="Self.DanhGia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GioHang" EntityType="Self.GioHang" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HopThu" EntityType="Self.HopThu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KhachHang" EntityType="Self.KhachHang" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LienHe" EntityType="Self.LienHe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PayMethod" EntityType="Self.PayMethod" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RankKH" EntityType="Self.RankKH" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SanPhamKhuyenMai" EntityType="Self.SanPhamKhuyenMai" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sex" EntityType="Self.Sex" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shipping" EntityType="Self.Shipping" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VoteLog" EntityType="Self.VoteLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BestSeller_1" EntityType="Self.BestSeller_1" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [BestSeller_1].[IDProduct] AS [IDProduct], 
+    [BestSeller_1].[ProductName] AS [ProductName], 
+    [BestSeller_1].[Gia] AS [Gia], 
+    [BestSeller_1].[Images] AS [Images], 
+    [BestSeller_1].[BestSell] AS [BestSell], 
+    [BestSeller_1].[ThuVe] AS [ThuVe]
+    FROM [dbo].[BestSeller_1] AS [BestSeller_1]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Administr__IDRol__145C0A3F" Association="Self.FK__Administr__IDRol__145C0A3F">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Administrator" EntitySet="Administrator" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DanhGia__IDKhach__24927208" Association="Self.FK__DanhGia__IDKhach__24927208">
+            <End Role="KhachHang" EntitySet="KhachHang" />
+            <End Role="DanhGia" EntitySet="DanhGia" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DanhGia__IDProdu__25869641" Association="Self.FK__DanhGia__IDProdu__25869641">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="DanhGia" EntitySet="DanhGia" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GioHang__IDKhach__2A4B4B5E" Association="Self.FK__GioHang__IDKhach__2A4B4B5E">
+            <End Role="KhachHang" EntitySet="KhachHang" />
+            <End Role="GioHang" EntitySet="GioHang" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GioHang__IDProdu__2B3F6F97" Association="Self.FK__GioHang__IDProdu__2B3F6F97">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="GioHang" EntitySet="GioHang" />
+          </AssociationSet>
+          <AssociationSet Name="FK__KhachHang__RankI__02FC7413" Association="Self.FK__KhachHang__RankI__02FC7413">
+            <End Role="RankKH" EntitySet="RankKH" />
+            <End Role="KhachHang" EntitySet="KhachHang" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LienHe__IDKhachH__2E1BDC42" Association="Self.FK__LienHe__IDKhachH__2E1BDC42">
+            <End Role="KhachHang" EntitySet="KhachHang" />
+            <End Role="LienHe" EntitySet="LienHe" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderDeta__IDOrd__34C8D9D1" Association="Self.FK__OrderDeta__IDOrd__34C8D9D1">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderDetail" EntitySet="OrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderDeta__IDPro__35BCFE0A" Association="Self.FK__OrderDeta__IDPro__35BCFE0A">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="OrderDetail" EntitySet="OrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__IDGioHan__47DBAE45" Association="Self.FK__Orders__IDGioHan__47DBAE45">
+            <End Role="GioHang" EntitySet="GioHang" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__IDKhachH__30F848ED" Association="Self.FK__Orders__IDKhachH__30F848ED">
+            <End Role="KhachHang" EntitySet="KhachHang" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__IDMethod__31EC6D26" Association="Self.FK__Orders__IDMethod__31EC6D26">
+            <End Role="PayMethod" EntitySet="PayMethod" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__IDAge__21B6055D" Association="Self.FK__Product__IDAge__21B6055D">
+            <End Role="Age" EntitySet="Age" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__IDBrand__1FCDBCEB" Association="Self.FK__Product__IDBrand__1FCDBCEB">
+            <End Role="Brand" EntitySet="Brand" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__IDCate__1ED998B2" Association="Self.FK__Product__IDCate__1ED998B2">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__IDSex__20C1E124" Association="Self.FK__Product__IDSex__20C1E124">
+            <End Role="Sex" EntitySet="Sex" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SanPhamKh__IDPro__6FE99F9F" Association="Self.FK__SanPhamKh__IDPro__6FE99F9F">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="SanPhamKhuyenMai" EntitySet="SanPhamKhuyenMai" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Shipping__IDOrde__38996AB5" Association="Self.FK__Shipping__IDOrde__38996AB5">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Shipping" EntitySet="Shipping" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VoteLog__IDKhach__74AE54BC" Association="Self.FK__VoteLog__IDKhach__74AE54BC">
+            <End Role="KhachHang" EntitySet="KhachHang" />
+            <End Role="VoteLog" EntitySet="VoteLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VoteLog__IDProdu__75A278F5" Association="Self.FK__VoteLog__IDProdu__75A278F5">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="VoteLog" EntitySet="VoteLog" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TOYSTORE_MODELModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Administrator">
+          <Key>
+            <PropertyRef Name="IDAdmin" />
+          </Key>
+          <Property Name="IDAdmin" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone_Admin" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="PasswordAdmin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IDRole" Type="Int32" />
+          <NavigationProperty Name="Role" Relationship="Self.FK__Administr__IDRol__145C0A3F" FromRole="Administrator" ToRole="Roles" />
+        </EntityType>
+        <EntityType Name="Age">
+          <Key>
+            <PropertyRef Name="IDAge" />
+          </Key>
+          <Property Name="IDAge" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AgeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Product__IDAge__21B6055D" FromRole="Age" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Brand">
+          <Key>
+            <PropertyRef Name="IDBrand" />
+          </Key>
+          <Property Name="IDBrand" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BrandName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Product__IDBrand__1FCDBCEB" FromRole="Brand" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="IDCate" />
+          </Key>
+          <Property Name="IDCate" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CateName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Product__IDCate__1ED998B2" FromRole="Category" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="DanhGia">
+          <Key>
+            <PropertyRef Name="IDDanhGia" />
+          </Key>
+          <Property Name="IDDanhGia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DanhGia1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IDProduct" Type="Int32" />
+          <Property Name="IDKhachHang" Type="Int32" />
+          <Property Name="NgayDanhGia" Type="DateTime" Precision="3" />
+          <Property Name="Content" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="KhachHang" Relationship="Self.FK__DanhGia__IDKhach__24927208" FromRole="DanhGia" ToRole="KhachHang" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__DanhGia__IDProdu__25869641" FromRole="DanhGia" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="GioHang">
+          <Key>
+            <PropertyRef Name="IDGioHang" />
+          </Key>
+          <Property Name="IDGioHang" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDProduct" Type="Int32" />
+          <Property Name="ProductName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IDKhachHang" Type="Int32" />
+          <Property Name="SoLuong" Type="Int32" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Price" Type="Int32" />
+          <Property Name="TongTien" Type="Int32" />
+          <Property Name="TongSanPham" Type="Int32" />
+          <NavigationProperty Name="KhachHang" Relationship="Self.FK__GioHang__IDKhach__2A4B4B5E" FromRole="GioHang" ToRole="KhachHang" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__GioHang__IDProdu__2B3F6F97" FromRole="GioHang" ToRole="Product" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__IDGioHan__47DBAE45" FromRole="GioHang" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="HopThu">
+          <Key>
+            <PropertyRef Name="IDHopThu" />
+          </Key>
+          <Property Name="IDHopThu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDKhachHang" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SendText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="KhachHang">
+          <Key>
+            <PropertyRef Name="IDKhachHang" />
+          </Key>
+          <Property Name="IDKhachHang" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordKH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone_Cus" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="DiaChi_Cus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RankID" Type="Int32" />
+          <Property Name="RankName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PointKH" Type="Int32" />
+          <NavigationProperty Name="DanhGias" Relationship="Self.FK__DanhGia__IDKhach__24927208" FromRole="KhachHang" ToRole="DanhGia" />
+          <NavigationProperty Name="GioHangs" Relationship="Self.FK__GioHang__IDKhach__2A4B4B5E" FromRole="KhachHang" ToRole="GioHang" />
+          <NavigationProperty Name="RankKH" Relationship="Self.FK__KhachHang__RankI__02FC7413" FromRole="KhachHang" ToRole="RankKH" />
+          <NavigationProperty Name="LienHes" Relationship="Self.FK__LienHe__IDKhachH__2E1BDC42" FromRole="KhachHang" ToRole="LienHe" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__IDKhachH__30F848ED" FromRole="KhachHang" ToRole="Orders" />
+          <NavigationProperty Name="VoteLogs" Relationship="Self.FK__VoteLog__IDKhach__74AE54BC" FromRole="KhachHang" ToRole="VoteLog" />
+        </EntityType>
+        <EntityType Name="LienHe">
+          <Key>
+            <PropertyRef Name="IDLienHe" />
+          </Key>
+          <Property Name="IDLienHe" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NoiDung" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IDKhachHang" Type="Int32" />
+          <Property Name="NgayLienHe" Type="DateTime" Precision="3" />
+          <Property Name="ChuDe" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="KhachHang" Relationship="Self.FK__LienHe__IDKhachH__2E1BDC42" FromRole="LienHe" ToRole="KhachHang" />
+        </EntityType>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="IDOrderDetail" />
+          </Key>
+          <Property Name="IDOrderDetail" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDOrder" Type="Int32" />
+          <Property Name="IDProduct" Type="Int32" />
+          <Property Name="UnitPrice" Type="Int32" />
+          <Property Name="Quantity" Type="Int32" />
+          <NavigationProperty Name="Order" Relationship="Self.FK__OrderDeta__IDOrd__34C8D9D1" FromRole="OrderDetail" ToRole="Orders" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__OrderDeta__IDPro__35BCFE0A" FromRole="OrderDetail" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="IDOrder" />
+          </Key>
+          <Property Name="IDOrder" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NgayDat" Type="DateTime" Precision="3" />
+          <Property Name="IDKhachHang" Type="Int32" />
+          <Property Name="IDMethod" Type="Int32" />
+          <Property Name="Address_Cus" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone_Cus" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="GhiChu" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PhiShip" Type="Int32" />
+          <Property Name="IDGioHang" Type="Int32" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChi_Cus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MethodName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="StatusPayment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PaypalAmount" Type="Double" />
+          <Property Name="GiamGia" Type="Double" />
+          <Property Name="ThueVAT" Type="Double" />
+          <Property Name="TongTien" Type="Double" />
+          <Property Name="ThanhTien" Type="Double" />
+          <NavigationProperty Name="GioHang" Relationship="Self.FK__Orders__IDGioHan__47DBAE45" FromRole="Orders" ToRole="GioHang" />
+          <NavigationProperty Name="KhachHang" Relationship="Self.FK__Orders__IDKhachH__30F848ED" FromRole="Orders" ToRole="KhachHang" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__IDOrd__34C8D9D1" FromRole="Orders" ToRole="OrderDetail" />
+          <NavigationProperty Name="PayMethod" Relationship="Self.FK__Orders__IDMethod__31EC6D26" FromRole="Orders" ToRole="PayMethod" />
+          <NavigationProperty Name="Shippings" Relationship="Self.FK__Shipping__IDOrde__38996AB5" FromRole="Orders" ToRole="Shipping" />
+        </EntityType>
+        <EntityType Name="PayMethod">
+          <Key>
+            <PropertyRef Name="IDMethod" />
+          </Key>
+          <Property Name="IDMethod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MethodName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__IDMethod__31EC6D26" FromRole="PayMethod" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="IDProduct" />
+          </Key>
+          <Property Name="IDProduct" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NgayNhap" Type="DateTime" Precision="3" />
+          <Property Name="ViewCount" Type="Int32" />
+          <Property Name="MoTa" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="PromotionPrice" Type="Int32" />
+          <Property Name="MaSP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ChuDe" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="XuatXu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Images" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Image1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Image2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Image3" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Image4" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SoLuong" Type="Int32" />
+          <Property Name="KichThuoc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="Gia" Type="Int32" />
+          <Property Name="IDSex" Type="Int32" />
+          <Property Name="IDCate" Type="Int32" />
+          <Property Name="IDBrand" Type="Int32" />
+          <Property Name="IDAge" Type="Int32" />
+          <NavigationProperty Name="Age" Relationship="Self.FK__Product__IDAge__21B6055D" FromRole="Product" ToRole="Age" />
+          <NavigationProperty Name="Brand" Relationship="Self.FK__Product__IDBrand__1FCDBCEB" FromRole="Product" ToRole="Brand" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__Product__IDCate__1ED998B2" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="DanhGias" Relationship="Self.FK__DanhGia__IDProdu__25869641" FromRole="Product" ToRole="DanhGia" />
+          <NavigationProperty Name="GioHangs" Relationship="Self.FK__GioHang__IDProdu__2B3F6F97" FromRole="Product" ToRole="GioHang" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__IDPro__35BCFE0A" FromRole="Product" ToRole="OrderDetail" />
+          <NavigationProperty Name="Sex" Relationship="Self.FK__Product__IDSex__20C1E124" FromRole="Product" ToRole="Sex" />
+          <NavigationProperty Name="SanPhamKhuyenMais" Relationship="Self.FK__SanPhamKh__IDPro__6FE99F9F" FromRole="Product" ToRole="SanPhamKhuyenMai" />
+          <NavigationProperty Name="VoteLogs" Relationship="Self.FK__VoteLog__IDProdu__75A278F5" FromRole="Product" ToRole="VoteLog" />
+        </EntityType>
+        <EntityType Name="RankKH">
+          <Key>
+            <PropertyRef Name="RankID" />
+          </Key>
+          <Property Name="RankID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RankName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="KhachHangs" Relationship="Self.FK__KhachHang__RankI__02FC7413" FromRole="RankKH" ToRole="KhachHang" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="IDRole" />
+          </Key>
+          <Property Name="IDRole" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Administrators" Relationship="Self.FK__Administr__IDRol__145C0A3F" FromRole="Roles" ToRole="Administrator" />
+        </EntityType>
+        <EntityType Name="SanPhamKhuyenMai">
+          <Key>
+            <PropertyRef Name="MaKhuyenMai" />
+          </Key>
+          <Property Name="MaKhuyenMai" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDProduct" Type="Int32" />
+          <Property Name="MoTa" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Discount" Type="Int32" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__SanPhamKh__IDPro__6FE99F9F" FromRole="SanPhamKhuyenMai" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Sex">
+          <Key>
+            <PropertyRef Name="IDSex" />
+          </Key>
+          <Property Name="IDSex" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SexName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Product__IDSex__20C1E124" FromRole="Sex" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Shipping">
+          <Key>
+            <PropertyRef Name="IDShip" />
+          </Key>
+          <Property Name="IDShip" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDOrder" Type="Int32" />
+          <Property Name="ShipName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IDKhachHang" Type="Int32" />
+          <Property Name="ShippingDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Order" Relationship="Self.FK__Shipping__IDOrde__38996AB5" FromRole="Shipping" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="VoteLog">
+          <Key>
+            <PropertyRef Name="AutoId" />
+          </Key>
+          <Property Name="AutoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SectionID" Type="Int16" />
+          <Property Name="VoteForId" Type="Int32" />
+          <Property Name="Vote" Type="Int16" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="IDKhachHang" Type="Int32" />
+          <Property Name="IDProduct" Type="Int32" />
+          <NavigationProperty Name="KhachHang" Relationship="Self.FK__VoteLog__IDKhach__74AE54BC" FromRole="VoteLog" ToRole="KhachHang" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__VoteLog__IDProdu__75A278F5" FromRole="VoteLog" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="BestSeller_1">
+          <Key>
+            <PropertyRef Name="IDProduct" />
+          </Key>
+          <Property Name="IDProduct" Type="Int32" Nullable="false" />
+          <Property Name="ProductName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Gia" Type="Int32" />
+          <Property Name="Images" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="BestSell" Type="Int32" />
+          <Property Name="ThuVe" Type="Int32" />
+        </EntityType>
+        <Association Name="FK__Administr__IDRol__145C0A3F">
+          <End Role="Roles" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="Administrator" Type="Self.Administrator" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="IDRole" />
+            </Principal>
+            <Dependent Role="Administrator">
+              <PropertyRef Name="IDRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__IDAge__21B6055D">
+          <End Role="Age" Type="Self.Age" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Age">
+              <PropertyRef Name="IDAge" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="IDAge" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__IDBrand__1FCDBCEB">
+          <End Role="Brand" Type="Self.Brand" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brand">
+              <PropertyRef Name="IDBrand" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="IDBrand" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__IDCate__1ED998B2">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="IDCate" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="IDCate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DanhGia__IDKhach__24927208">
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
+          <End Role="DanhGia" Type="Self.DanhGia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="IDKhachHang" />
+            </Principal>
+            <Dependent Role="DanhGia">
+              <PropertyRef Name="IDKhachHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DanhGia__IDProdu__25869641">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="DanhGia" Type="Self.DanhGia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="IDProduct" />
+            </Principal>
+            <Dependent Role="DanhGia">
+              <PropertyRef Name="IDProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GioHang__IDKhach__2A4B4B5E">
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
+          <End Role="GioHang" Type="Self.GioHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="IDKhachHang" />
+            </Principal>
+            <Dependent Role="GioHang">
+              <PropertyRef Name="IDKhachHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GioHang__IDProdu__2B3F6F97">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="GioHang" Type="Self.GioHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="IDProduct" />
+            </Principal>
+            <Dependent Role="GioHang">
+              <PropertyRef Name="IDProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__IDGioHan__47DBAE45">
+          <End Role="GioHang" Type="Self.GioHang" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GioHang">
+              <PropertyRef Name="IDGioHang" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="IDGioHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__KhachHang__RankI__02FC7413">
+          <End Role="RankKH" Type="Self.RankKH" Multiplicity="0..1" />
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RankKH">
+              <PropertyRef Name="RankID" />
+            </Principal>
+            <Dependent Role="KhachHang">
+              <PropertyRef Name="RankID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LienHe__IDKhachH__2E1BDC42">
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
+          <End Role="LienHe" Type="Self.LienHe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="IDKhachHang" />
+            </Principal>
+            <Dependent Role="LienHe">
+              <PropertyRef Name="IDKhachHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__IDKhachH__30F848ED">
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="IDKhachHang" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="IDKhachHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VoteLog__IDKhach__74AE54BC">
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
+          <End Role="VoteLog" Type="Self.VoteLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="IDKhachHang" />
+            </Principal>
+            <Dependent Role="VoteLog">
+              <PropertyRef Name="IDKhachHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderDeta__IDOrd__34C8D9D1">
+          <End Role="Orders" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="IDOrder" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="IDOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderDeta__IDPro__35BCFE0A">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="IDProduct" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="IDProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__IDMethod__31EC6D26">
+          <End Role="PayMethod" Type="Self.PayMethod" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PayMethod">
+              <PropertyRef Name="IDMethod" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="IDMethod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Shipping__IDOrde__38996AB5">
+          <End Role="Orders" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="Shipping" Type="Self.Shipping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="IDOrder" />
+            </Principal>
+            <Dependent Role="Shipping">
+              <PropertyRef Name="IDOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__IDSex__20C1E124">
+          <End Role="Sex" Type="Self.Sex" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sex">
+              <PropertyRef Name="IDSex" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="IDSex" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SanPhamKh__IDPro__6FE99F9F">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="SanPhamKhuyenMai" Type="Self.SanPhamKhuyenMai" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="IDProduct" />
+            </Principal>
+            <Dependent Role="SanPhamKhuyenMai">
+              <PropertyRef Name="IDProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VoteLog__IDProdu__75A278F5">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="VoteLog" Type="Self.VoteLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="IDProduct" />
+            </Principal>
+            <Dependent Role="VoteLog">
+              <PropertyRef Name="IDProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TOYSTORE_MODELEntities7" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Administrators" EntityType="Self.Administrator" />
+          <EntitySet Name="Ages" EntityType="Self.Age" />
+          <EntitySet Name="Brands" EntityType="Self.Brand" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="DanhGias" EntityType="Self.DanhGia" />
+          <EntitySet Name="GioHangs" EntityType="Self.GioHang" />
+          <EntitySet Name="HopThus" EntityType="Self.HopThu" />
+          <EntitySet Name="KhachHangs" EntityType="Self.KhachHang" />
+          <EntitySet Name="LienHes" EntityType="Self.LienHe" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="PayMethods" EntityType="Self.PayMethod" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="RankKHs" EntityType="Self.RankKH" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="SanPhamKhuyenMais" EntityType="Self.SanPhamKhuyenMai" />
+          <EntitySet Name="Sexes" EntityType="Self.Sex" />
+          <EntitySet Name="Shippings" EntityType="Self.Shipping" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="VoteLogs" EntityType="Self.VoteLog" />
+          <EntitySet Name="BestSeller_1" EntityType="Self.BestSeller_1" />
+          <AssociationSet Name="FK__Administr__IDRol__145C0A3F" Association="Self.FK__Administr__IDRol__145C0A3F">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Administrator" EntitySet="Administrators" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__IDAge__21B6055D" Association="Self.FK__Product__IDAge__21B6055D">
+            <End Role="Age" EntitySet="Ages" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__IDBrand__1FCDBCEB" Association="Self.FK__Product__IDBrand__1FCDBCEB">
+            <End Role="Brand" EntitySet="Brands" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__IDCate__1ED998B2" Association="Self.FK__Product__IDCate__1ED998B2">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DanhGia__IDKhach__24927208" Association="Self.FK__DanhGia__IDKhach__24927208">
+            <End Role="KhachHang" EntitySet="KhachHangs" />
+            <End Role="DanhGia" EntitySet="DanhGias" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DanhGia__IDProdu__25869641" Association="Self.FK__DanhGia__IDProdu__25869641">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="DanhGia" EntitySet="DanhGias" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GioHang__IDKhach__2A4B4B5E" Association="Self.FK__GioHang__IDKhach__2A4B4B5E">
+            <End Role="KhachHang" EntitySet="KhachHangs" />
+            <End Role="GioHang" EntitySet="GioHangs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GioHang__IDProdu__2B3F6F97" Association="Self.FK__GioHang__IDProdu__2B3F6F97">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="GioHang" EntitySet="GioHangs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__IDGioHan__47DBAE45" Association="Self.FK__Orders__IDGioHan__47DBAE45">
+            <End Role="GioHang" EntitySet="GioHangs" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__KhachHang__RankI__02FC7413" Association="Self.FK__KhachHang__RankI__02FC7413">
+            <End Role="RankKH" EntitySet="RankKHs" />
+            <End Role="KhachHang" EntitySet="KhachHangs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LienHe__IDKhachH__2E1BDC42" Association="Self.FK__LienHe__IDKhachH__2E1BDC42">
+            <End Role="KhachHang" EntitySet="KhachHangs" />
+            <End Role="LienHe" EntitySet="LienHes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__IDKhachH__30F848ED" Association="Self.FK__Orders__IDKhachH__30F848ED">
+            <End Role="KhachHang" EntitySet="KhachHangs" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VoteLog__IDKhach__74AE54BC" Association="Self.FK__VoteLog__IDKhach__74AE54BC">
+            <End Role="KhachHang" EntitySet="KhachHangs" />
+            <End Role="VoteLog" EntitySet="VoteLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderDeta__IDOrd__34C8D9D1" Association="Self.FK__OrderDeta__IDOrd__34C8D9D1">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderDeta__IDPro__35BCFE0A" Association="Self.FK__OrderDeta__IDPro__35BCFE0A">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__IDMethod__31EC6D26" Association="Self.FK__Orders__IDMethod__31EC6D26">
+            <End Role="PayMethod" EntitySet="PayMethods" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Shipping__IDOrde__38996AB5" Association="Self.FK__Shipping__IDOrde__38996AB5">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Shipping" EntitySet="Shippings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__IDSex__20C1E124" Association="Self.FK__Product__IDSex__20C1E124">
+            <End Role="Sex" EntitySet="Sexes" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SanPhamKh__IDPro__6FE99F9F" Association="Self.FK__SanPhamKh__IDPro__6FE99F9F">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="SanPhamKhuyenMai" EntitySet="SanPhamKhuyenMais" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VoteLog__IDProdu__75A278F5" Association="Self.FK__VoteLog__IDProdu__75A278F5">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="VoteLog" EntitySet="VoteLogs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TOYSTORE_MODELModelStoreContainer" CdmEntityContainer="TOYSTORE_MODELEntities7">
+          <EntitySetMapping Name="Administrators">
+            <EntityTypeMapping TypeName="TOYSTORE_MODELModel.Administrator">
+              <MappingFragment StoreEntitySet="Administrator">
+                <ScalarProperty Name="IDAdmin" ColumnName="IDAdmin" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone_Admin" ColumnName="Phone_Admin" />
+                <ScalarProperty Name="PasswordAdmin" ColumnName="PasswordAdmin" />
+                <ScalarProperty Name="IDRole" ColumnName="IDRole" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ages">
+            <EntityTypeMapping TypeName="TOYSTORE_MODELModel.Age">
+              <MappingFragment StoreEntitySet="Age">
+                <ScalarProperty Name="IDAge" ColumnName="IDAge" />
+                <ScalarProperty Name="AgeName" ColumnName="AgeName" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Brands">
+            <EntityTypeMapping TypeName="TOYSTORE_MODELModel.Brand">
+              <MappingFragment StoreEntitySet="Brand">
+                <ScalarProperty Name="IDBrand" ColumnName="IDBrand" />
+                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="TOYSTORE_MODELModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="IDCate" ColumnName="IDCate" />
+                <ScalarProperty Name="CateName" ColumnName="CateName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DanhGias">
+            <EntityTypeMapping TypeName="TOYSTORE_MODELModel.DanhGia">
+              <MappingFragment StoreEntitySet="DanhGia">
+                <ScalarProperty Name="IDDanhGia" ColumnName="IDDanhGia" />
+                <ScalarProperty Name="DanhGia1" ColumnName="DanhGia" />
+                <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
+                <ScalarProperty Name="IDKhachHang" ColumnName="IDKhachHang" />
+                <ScalarProperty Name="NgayDanhGia" ColumnName="NgayDanhGia" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GioHangs">
+            <EntityTypeMapping TypeName="TOYSTORE_MODELModel.GioHang">
+              <MappingFragment StoreEntitySet="GioHang">
+                <ScalarProperty Name="IDGioHang" ColumnName="IDGioHang" />
+                <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="IDKhachHang" ColumnName="IDKhachHang" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+                <ScalarProperty Name="TongSanPham" ColumnName="TongSanPham" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HopThus">
+            <EntityTypeMapping TypeName="TOYSTORE_MODELModel.HopThu">
+              <MappingFragment StoreEntitySet="HopThu">
+                <ScalarProperty Name="IDHopThu" ColumnName="IDHopThu" />
+                <ScalarProperty Name="IDKhachHang" ColumnName="IDKhachHang" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="SendText" ColumnName="SendText" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KhachHangs">
+            <EntityTypeMapping TypeName="TOYSTORE_MODELModel.KhachHang">
+              <MappingFragment StoreEntitySet="KhachHang">
+                <ScalarProperty Name="IDKhachHang" ColumnName="IDKhachHang" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PasswordKH" ColumnName="PasswordKH" />
+                <ScalarProperty Name="Phone_Cus" ColumnName="Phone_Cus" />
+                <ScalarProperty Name="DiaChi_Cus" ColumnName="DiaChi_Cus" />
+                <ScalarProperty Name="RankID" ColumnName="RankID" />
+                <ScalarProperty Name="RankName" ColumnName="RankName" />
+                <ScalarProperty Name="PointKH" ColumnName="PointKH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LienHes">
+            <EntityTypeMapping TypeName="TOYSTORE_MODELModel.LienHe">
+              <MappingFragment StoreEntitySet="LienHe">
+                <ScalarProperty Name="IDLienHe" ColumnName="IDLienHe" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="IDKhachHang" ColumnName="IDKhachHang" />
+                <ScalarProperty Name="NgayLienHe" ColumnName="NgayLienHe" />
+                <ScalarProperty Name="ChuDe" ColumnName="ChuDe" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetails">
+            <EntityTypeMapping TypeName="TOYSTORE_MODELModel.OrderDetail">
+              <MappingFragment StoreEntitySet="OrderDetail">
+                <ScalarProperty Name="IDOrderDetail" ColumnName="IDOrderDetail" />
+                <ScalarProperty Name="IDOrder" ColumnName="IDOrder" />
+                <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="TOYSTORE_MODELModel.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="IDOrder" ColumnName="IDOrder" />
+                <ScalarProperty Name="NgayDat" ColumnName="NgayDat" />
+                <ScalarProperty Name="IDKhachHang" ColumnName="IDKhachHang" />
+                <ScalarProperty Name="IDMethod" ColumnName="IDMethod" />
+                <ScalarProperty Name="Address_Cus" ColumnName="Address_Cus" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Phone_Cus" ColumnName="Phone_Cus" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="PhiShip" ColumnName="PhiShip" />
+                <ScalarProperty Name="IDGioHang" ColumnName="IDGioHang" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="DiaChi_Cus" ColumnName="DiaChi_Cus" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MethodName" ColumnName="MethodName" />
+                <ScalarProperty Name="StatusPayment" ColumnName="StatusPayment" />
+                <ScalarProperty Name="PaypalAmount" ColumnName="PaypalAmount" />
+                <ScalarProperty Name="GiamGia" ColumnName="GiamGia" />
+                <ScalarProperty Name="ThueVAT" ColumnName="ThueVAT" />
+                <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+                <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PayMethods">
+            <EntityTypeMapping TypeName="TOYSTORE_MODELModel.PayMethod">
+              <MappingFragment StoreEntitySet="PayMethod">
+                <ScalarProperty Name="IDMethod" ColumnName="IDMethod" />
+                <ScalarProperty Name="MethodName" ColumnName="MethodName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="TOYSTORE_MODELModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="NgayNhap" ColumnName="NgayNhap" />
+                <ScalarProperty Name="ViewCount" ColumnName="ViewCount" />
+                <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+                <ScalarProperty Name="PromotionPrice" ColumnName="PromotionPrice" />
+                <ScalarProperty Name="MaSP" ColumnName="MaSP" />
+                <ScalarProperty Name="ChuDe" ColumnName="ChuDe" />
+                <ScalarProperty Name="XuatXu" ColumnName="XuatXu" />
+                <ScalarProperty Name="Images" ColumnName="Images" />
+                <ScalarProperty Name="Image1" ColumnName="Image1" />
+                <ScalarProperty Name="Image2" ColumnName="Image2" />
+                <ScalarProperty Name="Image3" ColumnName="Image3" />
+                <ScalarProperty Name="Image4" ColumnName="Image4" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+                <ScalarProperty Name="KichThuoc" ColumnName="KichThuoc" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Gia" ColumnName="Gia" />
+                <ScalarProperty Name="IDSex" ColumnName="IDSex" />
+                <ScalarProperty Name="IDCate" ColumnName="IDCate" />
+                <ScalarProperty Name="IDBrand" ColumnName="IDBrand" />
+                <ScalarProperty Name="IDAge" ColumnName="IDAge" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RankKHs">
+            <EntityTypeMapping TypeName="TOYSTORE_MODELModel.RankKH">
+              <MappingFragment StoreEntitySet="RankKH">
+                <ScalarProperty Name="RankID" ColumnName="RankID" />
+                <ScalarProperty Name="RankName" ColumnName="RankName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="TOYSTORE_MODELModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="IDRole" ColumnName="IDRole" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SanPhamKhuyenMais">
+            <EntityTypeMapping TypeName="TOYSTORE_MODELModel.SanPhamKhuyenMai">
+              <MappingFragment StoreEntitySet="SanPhamKhuyenMai">
+                <ScalarProperty Name="MaKhuyenMai" ColumnName="MaKhuyenMai" />
+                <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
+                <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sexes">
+            <EntityTypeMapping TypeName="TOYSTORE_MODELModel.Sex">
+              <MappingFragment StoreEntitySet="Sex">
+                <ScalarProperty Name="IDSex" ColumnName="IDSex" />
+                <ScalarProperty Name="SexName" ColumnName="SexName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shippings">
+            <EntityTypeMapping TypeName="TOYSTORE_MODELModel.Shipping">
+              <MappingFragment StoreEntitySet="Shipping">
+                <ScalarProperty Name="IDShip" ColumnName="IDShip" />
+                <ScalarProperty Name="IDOrder" ColumnName="IDOrder" />
+                <ScalarProperty Name="ShipName" ColumnName="ShipName" />
+                <ScalarProperty Name="IDKhachHang" ColumnName="IDKhachHang" />
+                <ScalarProperty Name="ShippingDate" ColumnName="ShippingDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="TOYSTORE_MODELModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VoteLogs">
+            <EntityTypeMapping TypeName="TOYSTORE_MODELModel.VoteLog">
+              <MappingFragment StoreEntitySet="VoteLog">
+                <ScalarProperty Name="AutoId" ColumnName="AutoId" />
+                <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+                <ScalarProperty Name="VoteForId" ColumnName="VoteForId" />
+                <ScalarProperty Name="Vote" ColumnName="Vote" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="IDKhachHang" ColumnName="IDKhachHang" />
+                <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BestSeller_1">
+            <EntityTypeMapping TypeName="TOYSTORE_MODELModel.BestSeller_1">
+              <MappingFragment StoreEntitySet="BestSeller_1">
+                <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="Gia" ColumnName="Gia" />
+                <ScalarProperty Name="Images" ColumnName="Images" />
+                <ScalarProperty Name="BestSell" ColumnName="BestSell" />
+                <ScalarProperty Name="ThuVe" ColumnName="ThuVe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

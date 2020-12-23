@@ -1,0 +1,110 @@
+﻿@model ThuongMaiDienTu.Models.KhachHang
+    @{ 
+        Layout = null;
+    }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+   
+    <link href="~/Content/bootstrap-4.3.1-dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/css/Admin.css" rel="stylesheet" />
+
+    <link href="~/Content/fontawesome-free-5.11.2-web/css/all.css" rel="stylesheet" />
+ 
+
+    <link href="~/Content/css/User_DKi.css" rel="stylesheet" />
+
+    <script src="~/Content/css/index.js" type="text/javascript"></script>
+
+    <script src="~/Content/css/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="~/Content/bootstrap-4.3.1-dist/js/bootstrap.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <img class="Hinhnen_dangky" src="~/Contents/Image/Banner/BG2.png">
+                <form class="form-horizontal formDangky_user" action='' method="POST">
+                    <fieldset>
+
+                        <div id="legend">
+                            <legend class="">ĐĂNG KÝ THÀNH VIÊN</legend>
+                        </div>
+                        <div class="control-group">
+                            <!-- Username -->
+                            <label class="control-label" for="username">Họ tên</label>
+                            <div class="controls">
+                                <input type="text" id="username" name="FullName" placeholder="" class="input-xlarge">
+
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <!-- E-mail -->
+                            <label class="control-label" for="email">E-mail</label>
+                            <div class="controls">
+                                <input type="text" id="email" name="Email" placeholder="" class="input-xlarge">
+
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <!-- E-mail -->
+                            <label class="control-label" for="phone">Số điện thoại</label>
+                            <div class="controls">
+                                <input type="text" id="Phone" name="Phone_Cus" placeholder="" class="input-xlarge">
+
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <!-- E-mail -->
+                            <label class="control-label" for="phone">Địa chỉ</label>
+                            <div class="controls">
+                                <input type="text" id="Phone" name="Address_Cus" placeholder="" class="input-xlarge">
+
+                            </div>
+                        </div>
+
+
+                        <div class="control-group">
+                            <!-- Password-->
+                            <label class="control-label" for="password">Mật khẩu</label>
+                            <div class="controls">
+                                <input type="password" id="password" name="PasswordKH" placeholder="" class="input-xlarge">
+
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <!-- Password-Confirm -->
+                            <label class="control-label" for="password_confirm">Xác nhận mật khẩu</label>
+                            <div class="controls">
+                                <input type="password" id="password_confirm" name="ConfirmPassword" placeholder="" class="input-xlarge">
+
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <!-- Button -->
+                            <div class="controls">
+
+                                <a class="btn btn-dark" href="~/User/SignIn">Trở lại</a>
+                                <input class="btn btn-success" type="submit" value="Đăng ký" />
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

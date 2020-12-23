@@ -1,0 +1,555 @@
+﻿@model ThuongMaiDienTu.Models.Product
+@{
+    ViewBag.Title = "BOOKSTORE | Chi tiết sản phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+   
+}
+<head>
+    <script>
+        function openCity(evt, cityName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v9.0&appId=348352966439318&autoLogAppEvents=1" nonce="FAb5rGhX"></script>
+    <style>
+        .tab {
+            margin-top: 20px;
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+        }
+
+            /* Style the buttons inside the tab */
+            .tab button {
+                background-color: inherit;
+                float: left;
+                border: none;
+                outline: none;
+                cursor: pointer;
+                padding: 14px 16px;
+                transition: 0.3s;
+                font-size: 17px;
+            }
+
+                /* Change background color of buttons on hover */
+                .tab button:hover {
+                    background-color: #ddd;
+                }
+
+                /* Create an active/current tablink class */
+                .tab button.active {
+                    background-color: #ccc;
+                }
+
+        .tabcontent {
+            display: none;
+            padding: 30px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+
+            .tabcontent p {
+                font-size: 18px;
+                text-align: justify;
+            }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            overflow-x: hidden;
+        }
+
+
+
+        .preview {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+        }
+
+
+
+        .preview-pic {
+            -webkit-box-flex: 1;
+            -webkit-flex-grow: 1;
+            /*-ms-flex-positive: 1;*/
+            flex-grow: 1;
+        }
+
+        .preview-thumbnail.nav-tabs {
+            border: none;
+            margin-top: 15px;
+        }
+
+            .preview-thumbnail.nav-tabs li {
+                width: 18%;
+                margin-right: 2.5%;
+            }
+
+                .preview-thumbnail.nav-tabs li img {
+                    max-width: 100%;
+                    display: block;
+                }
+
+                .preview-thumbnail.nav-tabs li a {
+                    padding: 0;
+                    margin: 0;
+                    cursor: pointer;
+                }
+
+                .preview-thumbnail.nav-tabs li:last-of-type {
+                    margin-right: 0;
+                }
+
+        .tab-content {
+            overflow: hidden;
+        }
+
+            .tab-content img {
+                width: 100%;
+                -webkit-animation-name: opacity;
+                animation-name: opacity;
+                -webkit-animation-duration: .3s;
+                animation-duration: .3s;
+            }
+    </style>
+</head>
+<div class="">
+    <div class="">
+        <h1 class="page-header">
+            Chi tiết sản phẩm
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fas fa-home"></i> <a href="@Url.Action("Index","Home")">Trang chủ</a>
+            </li>
+            <li>
+                <i class="fas fa-info-circle"></i> Chi tiết sản phẩm
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="container">
+
+    <div class="row">
+
+        <div class=" Preview col-md-6">
+            <div class="preview-pic tab-content">
+                <div class="tab-pane active" id="pic-1">
+                    <img src="~/Contents/Image/Toy/@Model.Images" style="height: auto; width: 350px;">
+                </div>
+                <div class="tab-pane" id="pic-2">
+                    <img src="~/Contents/Image/Toy/@Model.Image1" style="height: auto; width: 350px;">
+                </div>
+                <div class="tab-pane" id="pic-3">
+                    <img src="~/Contents/Image/Toy/@Model.Image2" style="height: auto; width: 350px;">
+                </div>
+                <div class="tab-pane" id="pic-4">
+                    <img src="~/Contents/Image/Toy/@Model.Image3" style="height: auto; width: 350px;">
+                </div>
+                <div class="tab-pane" id="pic-5">
+                    <img src="~/Contents/Image/Toy/@Model.Image4" style="height: auto; width: 350px;">
+                </div>
+            </div>
+            <ul class="preview-thumbnail nav nav-tabs">
+                <li class="active">
+                    <a data-target="#pic-1" data-toggle="tab"><img src="~/Contents/Image/Toy/@Model.Images" style="height: auto; width: 350px;"></a>
+                </li>
+                <li>
+                    <a data-target="#pic-2" data-toggle="tab"><img src="~/Contents/Image/Toy/@Model.Image1" style="height: auto; width: 350px;"></a>
+                </li>
+                <li>
+                    <a data-target="#pic-3" data-toggle="tab"><img src="~/Contents/Image/Toy/@Model.Image2" style="height: auto; width: 350px;"></a>
+                </li>
+                <li>
+                    <a data-target="#pic-4" data-toggle="tab"><img src="~/Contents/Image/Toy/@Model.Image3" style="height: auto; width: 350px;"></a>
+                </li>
+                <li>
+                    <a data-target="#pic-5" data-toggle="tab"><img src="~/Contents/Image/Toy/@Model.Image4" style="height: auto; width: 350px;"></a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <h3 style="margin-left: 0; margin-top: 120px;text-align: center">@Html.DisplayFor(model => model.ProductName)</h3>
+            <hr />
+            @*<div>
+                    <p style="text-align: left; font-size: 20px; font-weight: bold;">
+                        Thương hiệu:
+
+                        <a>@Html.DisplayNameFor(item => item.Brand.BrandName)</a>
+                    </p>
+
+                </div>*@
+
+            <div class="row">
+
+                @if (Model.PromotionPrice <= 0 || Model.PromotionPrice == Model.Gia)
+                {
+                    <div class="col-md-3 col-xs-3">
+                        <p style="text-align: left; color: red; font-size: 20px; font-weight: bold;">@Html.DisplayFor(model => model.Gia) <sup> đ</sup></p>
+                    </div>
+
+                }
+                else
+                {
+                    <div class="col-md-3 col-xs-3">
+                        <p style="text-align: left; color: red; font-size: 20px; font-weight: bold;"><strike></strike>@Html.DisplayFor(model => model.PromotionPrice) <sup> đ</sup></p>
+                    </div>
+                    <div class="col-md-3 col-xs-3">
+                        <p style="text-align: right; font-weight: bold; font-size: 20px"><strike>@Html.DisplayFor(model => model.Gia)<sup> đ</sup></strike></p>
+                    </div>
+                }
+
+
+            </div>
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <td><i class="fas fa-dollar-sign"></i>  Hàng chính hãng, chứng nhận an toàn</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-truck-moving"></i>  Miễn phí giao hàng toàn quốc đơn trên 500K</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fa fa-phone"></i>   Liên hệ hỗ trợ:0333826861</td>
+                    </tr>
+                </tbody>
+            </table>
+            <a onclick="addtocart()" href="/ShoppingCart/AddToCart/@Model.IDProduct" class="btn btn-warning" style="width: 100%;">Thêm vào giỏ hàng <i class="fas fa-shopping-cart"></i></a>
+        </div>
+
+    </div>
+
+    <div id="intro" style="display: block">
+        <h3 style="text-align: left">Giới thiệu sản phẩm</h3>
+        <p>@Html.DisplayFor(m => m.MoTa)</p>
+        <hr />
+    </div>
+    <h4 style="text-align: left">Thông tin sản phẩm</h4>
+    <table class="table table-hover">
+        @if (Model.IDCate == 4)
+        {
+            <tr>
+                <td width="30%">Chủ đề</td>
+                <td>@Html.DisplayFor(model => model.ChuDe)</td>
+            </tr>
+            <tr>
+                <td>Xuất xứ</td>
+                <td>@Html.DisplayFor(model => model.XuatXu)</td>
+            </tr>
+            <tr>
+                <td>Thương hiệu</td>
+                <td>@Html.DisplayFor(model => model.Brand.BrandName)</td>
+            </tr>
+            <tr>
+                <td>Độ tuổi phù hợp</td>
+                <td>@Html.DisplayFor(model => model.Age.AgeName)</td>
+            </tr>
+            <tr>
+                <td>Giới tính</td>
+                <td>@Html.DisplayFor(model => model.Sex.SexName)</td>
+            </tr>
+            <tr>
+                <td>Số lượng</td>
+                @{ var quantity = Model.SoLuong;
+
+                }
+
+                @if (quantity == 0)
+                {
+                    <td>Hết hàng</td>
+                }
+                else
+                {
+                    <td>
+                        @Html.DisplayFor(model => model.SoLuong)
+                    </td>
+                }
+            </tr>
+        }
+        @if (Model.IDCate == 5)
+        {
+            <tr>
+                <td width="30%">Chủ đề</td>
+                <td>@Html.DisplayFor(model => model.ChuDe)</td>
+            </tr>
+            <tr>
+                <td>Xuất xứ</td>
+                <td>@Html.DisplayFor(model => model.XuatXu)</td>
+            </tr>
+            <tr>
+                <td>Thương hiệu</td>
+                <td>@Html.DisplayFor(model => model.Brand.BrandName)</td>
+            </tr>
+            <tr>
+                <td>Độ tuổi phù hợp</td>
+                <td>@Html.DisplayFor(model => model.Age.AgeName)</td>
+            </tr>
+            <tr>
+                <td>Giới tính</td>
+                <td>@Html.DisplayFor(model => model.Sex.SexName)</td>
+            </tr>
+            <tr>
+                <td>Số lượng</td>
+                @{ var quantity = Model.SoLuong;
+
+                }
+
+                @if (quantity == 0)
+                {
+                    <td>Hết hàng</td>
+                }
+                else
+                {
+                    <td>
+                        @Html.DisplayFor(model => model.SoLuong)
+                    </td>
+                }
+            </tr>
+        }
+        @if (Model.IDCate == 6)
+        {
+            <tr>
+                <td width="30%">Chủ đề</td>
+                <td>@Html.DisplayFor(model => model.ChuDe)</td>
+            </tr>
+            <tr>
+                <td>Xuất xứ</td>
+                <td>@Html.DisplayFor(model => model.XuatXu)</td>
+            </tr>
+            <tr>
+                <td>Thương hiệu</td>
+                <td>@Html.DisplayFor(model => model.Brand.BrandName)</td>
+            </tr>
+            <tr>
+                <td>Độ tuổi phù hợp</td>
+                <td>@Html.DisplayFor(model => model.Age.AgeName)</td>
+            </tr>
+            <tr>
+                <td>Giới tính</td>
+                <td>@Html.DisplayFor(model => model.Sex.SexName)</td>
+            </tr>
+            <tr>
+                <td>Số lượng</td>
+                @{ var quantity = Model.SoLuong;
+
+                }
+
+                @if (quantity == 0)
+                {
+                    <td>Hết hàng</td>
+                }
+                else
+                {
+                    <td>
+                        @Html.DisplayFor(model => model.SoLuong)
+                    </td>
+                }
+            </tr>
+        }
+        @if (Model.IDCate == 7)
+        {
+            <tr>
+                <td width="30%">Chủ đề</td>
+                <td>@Html.DisplayFor(model => model.ChuDe)</td>
+            </tr>
+            <tr>
+                <td>Xuất xứ</td>
+                <td>@Html.DisplayFor(model => model.XuatXu)</td>
+            </tr>
+            <tr>
+                <td>Thương hiệu</td>
+                <td>@Html.DisplayFor(model => model.Brand.BrandName)</td>
+            </tr>
+            <tr>
+                <td>Độ tuổi phù hợp</td>
+                <td>@Html.DisplayFor(model => model.Age.AgeName)</td>
+            </tr>
+            <tr>
+                <td>Giới tính</td>
+                <td>@Html.DisplayFor(model => model.Sex.SexName)</td>
+            </tr>
+            <tr>
+                <td>Số lượng</td>
+                @{ var quantity = Model.SoLuong;
+
+                }
+
+                @if (quantity == 0)
+                {
+                    <td>Hết hàng</td>
+                }
+                else
+                {
+                    <td>
+                        @Html.DisplayFor(model => model.SoLuong)
+                    </td>
+                }
+            </tr>
+        }
+        @if (Model.IDCate == 8)
+        {
+            <tr>
+                <td width="30%">Chủ đề</td>
+                <td>@Html.DisplayFor(model => model.ChuDe)</td>
+            </tr>
+            <tr>
+                <td>Xuất xứ</td>
+                <td>@Html.DisplayFor(model => model.XuatXu)</td>
+            </tr>
+            <tr>
+                <td>Thương hiệu</td>
+                <td>@Html.DisplayFor(model => model.Brand.BrandName)</td>
+            </tr>
+            <tr>
+                <td>Độ tuổi phù hợp</td>
+                <td>@Html.DisplayFor(model => model.Age.AgeName)</td>
+            </tr>
+            <tr>
+                <td>Giới tính</td>
+                <td>@Html.DisplayFor(model => model.Sex.SexName)</td>
+            </tr>
+            <tr>
+                <td>Số lượng</td>
+                @{ var quantity = Model.SoLuong;
+
+                }
+
+                @if (quantity == 0)
+                {
+                    <td>Hết hàng</td>
+                }
+                else
+                {
+                    <td>
+                        @Html.DisplayFor(model => model.SoLuong)
+                    </td>
+                }
+            </tr>
+        }
+        @if (Model.IDCate == 9)
+        {
+            <tr>
+                <td width="30%">Chủ đề</td>
+                <td>@Html.DisplayFor(model => model.ChuDe)</td>
+            </tr>
+            <tr>
+                <td>Xuất xứ</td>
+                <td>@Html.DisplayFor(model => model.XuatXu)</td>
+            </tr>
+            <tr>
+                <td>Thương hiệu</td>
+                <td>@Html.DisplayFor(model => model.Brand.BrandName)</td>
+            </tr>
+            <tr>
+                <td>Độ tuổi phù hợp</td>
+                <td>@Html.DisplayFor(model => model.Age.AgeName)</td>
+            </tr>
+            <tr>
+                <td>Giới tính</td>
+                <td>@Html.DisplayFor(model => model.Sex.SexName)</td>
+            </tr>
+            <tr>
+                <td>Số lượng</td>
+                @{ var quantity = Model.SoLuong;
+
+                }
+
+                @if (quantity == 0)
+                {
+                    <td>Hết hàng</td>
+                }
+                else
+                {
+                    <td>
+                        @Html.DisplayFor(model => model.SoLuong)
+                    </td>
+                }
+            </tr>
+        }
+    </table>
+</div>
+<div class="container">
+    <div class="tab">
+
+        <button class="tablinks active" onclick="openCity(event, 'rating',)">Bình luận</button>
+        <button class="tablinks " onclick="openCity(event, 'comment',)">Đánh giá</button>
+    </div>
+
+    <div id="rating" class="tabcontent" style="display: block">
+        <div class="fb-comments" data-href="https://localhost:44315/Home/Detail/@Model.IDProduct" data-numposts="5" data-width=""></div>
+    </div>
+
+    <div id="comment" class="tabcontent" style="display: none">
+
+        @Html.Action("Rating", "Home")
+
+        <div>
+            @foreach (var rate in Model.DanhGias.OrderByDescending(m => m.NgayDanhGia).Take(8))
+            {
+                <hr />
+                <p><b>@rate.KhachHang.FullName</b> | @rate.NgayDanhGia </p>
+                <p>@rate.Content</p>
+            }
+     </div>
+    </div>
+</div>
+<div style="background-color:#BDD454">
+
+    <h2 style="text-align:center; color:white;padding-top:50px;font-size:50px"><b>Tại sao nên mua?</b></h2>
+
+    <div class="container" style="padding-bottom:50px;padding-top:25px">
+        <div class="column">
+            <div style="background-color:white;padding-left:10px;padding-right:10px;padding-bottom:20px;padding-top:20px">
+                <p style="color:red;font-size:40px"><b>Calasu</b></p>
+                <p><b> Hàng cao cấp chính hãng</b></p>
+                <p> Calasu luôn được bình chọn là thương hiệu đồ chơi ưa thích tại Việt Nam</p>
+            </div>
+        </div>
+        <div class="column">
+            <div style="background-color:white;padding-left:10px;padding-right:10px;padding-bottom:20px;padding-top:20px">
+                <p style="color:red;font-size:40px"><b>50% Off</b></p>
+                <p><b> Sale vơi số lượng có hạn</b></p>
+                <p> Chỉ diễn ra cuối năm, giới hạn chỉ 1000 sản phẩm sẵn trong kho</p>
+            </div>
+        </div>
+
+        <div class="column">
+            <div style="background-color:white;padding-left:10px;padding-right:10px;padding-bottom:20px;padding-top:20px">
+                <p style="color:red;font-size:40px"><b>Free ship</b></p>
+                <p><b> Nhận sản phẩm trong 24h</b></p>
+                <p> Hoàn toàn miễn phí ship trong nội thành với đơn hàng từ 500k</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div>
+    @Html.Action("RelatedProducts", "Home")
+</div>
+@*<div id="snackbar">Đã thêm vào giỏ hàng</div>*@
+<style>
+    .column {
+        float: left;
+        width: 33.33%;
+        padding: 10px;
+    }
+</style>
+
+

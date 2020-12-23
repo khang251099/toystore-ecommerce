@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <!--Css and Javacripts-->
+    <script src="~/Content/Java/HighChart/highcharts.js"></script>
+    <script src="~/Content/Java/HighChart/exporting.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!--Font-Awesome-->
+    <script src="https://kit.fontawesome.com/7d370c1d29.js" crossorigin="anonymous"></script>
+    <!--google font-->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="~/Content/css/admin_stylere.css" rel="stylesheet" />
+    <script src="~/Content/Java/script.js"></script>
+
+
+
+
+    <script>
+        $(document).ready(function () {
+            $("div[style='opacity: 0.9; z-index: 2147483647; position: fixed; left: 0px; bottom: 0px; height: 65px; right: 0px; display: block; width: 100%; background-color: #202020; margin: 0px; padding: 0px;']").remove();
+            $("div[style='margin: 0px; padding: 0px; left: 0px; width: 100%; height: 65px; right: 0px; bottom: 0px; display: block; position: fixed; z-index: 2147483647; opacity: 0.9; background-color: rgb(32, 32, 32);']").remove();
+            $("div[onmouseover='S_ssac();']").remove();
+            $("center").remove();
+            $("div[style='height: 65px;']").remove();
+        });
+    </script>
+
+
+</head>
+<body>
+    <div id="topheader">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+             
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav navbar-right">
+                        @if (Session["AdminID"] == null || Session["AdminRole"] == null)
+                        {
+                            Response.Redirect(Url.Action("SignIn", "Admin"));
+                        }
+                        else
+                        {
+                            var account = Session["AdminName"].ToString();
+                            var role = Session["AdminRoleName"].ToString();
+                            <li><a href="#"><i class="fas fa-user-circle"></i> @account</a></li>
+                         
+                            <li><a href="@Url.Action("LogOut","Admin")"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
+                        }
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+    </div>
+    <input type="checkbox" id="check">
+    <label for="check">
+        <i class="fas fa-bars" id="btn"></i>
+        <i class="fas fa-times" id="cancel"></i>
+    </label>
+    <div class="sidebar">
+        <ul>
+    
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse3" aria-expanded="true" aria-controls="collapse3">
+                    <i class="fas fa fa-puzzle-piece "></i>
+                    Quản lý sản phẩm
+                    <span class="caret"></span>
+                </a>
+                <div id="collapse3" class="collapse">
+                    <div class="sidebar-collapse-item">
+                        <a href="~/Products/Index"><i class="fas fa fa-puzzle-piece"></i> Danh sách đồ chơi</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item"><a href="~/HoaDonBanHang/Index"><i class="fas fa fa-list-ol"></i>Hóa đơn bán hàng</a></li>
+            <li class="nav-item"><a href="~/Order/Index"><i class="fas fa fa-cart-plus"></i>Quản lý đơn hàng</a></li>
+            <li class="nav-item"><a href="~/Contact/Index"><i class="fas fa-mail-bulk"></i>Hộp thư </a></li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
+                    <i class="fas fa-users"></i>
+                    Quản lý người dùng
+                    <span class="caret"></span>
+                </a>
+                <div id="collapse1" class="collapse">
+                    <div class="sidebar-collapse-item">
+                        <a class="collapse-item" href="~/Customer/Index"><i class="fas 	fa fa-child"></i> Khách hàng</a>
+                        @if (Session["AdminID"] != null && Session["AdminRole"] != null && Session["AdminRole"].ToString() == "1")
+                        {
+                            <a href="~/Admin/Index"><i class="fas fa-user-shield"></i>Nhân viên</a>
+                        }
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item"><a href="~/Rating/Index"><i class="fas fa fa-commenting-o"></i>Quản lý đánh giá</a></li>
+            <li>
+                @if (Session["AdminID"] != null && Session["AdminRole"] != null && Session["AdminRole"].ToString() == "1")
+                {
+                <a href="~/Products/Report"><i class="fas fa-chart-pie"></i>Báo cáo & Thống kê</a>
+                }
+                
+            </li>
+        </ul>
+</div>
+    <section>
+        <div style="overflow-x: auto">
+            @RenderBody()
+        </div>
+    </section>
+
+</body>
+</html>

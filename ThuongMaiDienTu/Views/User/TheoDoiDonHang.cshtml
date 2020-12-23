@@ -1,0 +1,100 @@
+﻿@model IEnumerable<ThuongMaiDienTu.Models.Order>
+
+@{
+    ViewBag.Title = "TheoDoiDonHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h1>Theo dõi đơn hàng</h1>
+    <div style="padding: 15px;">
+        <div class="row thumbnail" style="padding: 30px">
+            <div class="col-md-6"></div>
+            <div class="col-md-6">
+                @using (Html.BeginForm("TheoDoiDonHang", "User"))
+                {
+                    <div class="col-md-9">
+                        @Html.TextBox("search", "", new { placeholder = "Nhập số điện thoại để theo dõi đơn h", @class = "form-control" })
+
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-danger btnTimkiem_theodoidonhang">Tìm kiếm</button>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+    <table class="table">
+        <tr>
+
+            <th>
+                Mã đơn hàng
+            </th>
+            <th>Tổng tiền</th>
+            <th>
+                Ngày đặt
+            </th>
+            <th>
+                Trạng thái đơn hàng
+            </th>
+            <th>
+                Trạng thái thanh toán
+            </th>
+            <th>Xem chi tiết đơn hàng</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+    <tr>
+        <td>
+            @item.IDOrder
+        </td>
+        <td>
+            @item.ThanhTien
+        </td>
+        <td>
+            @item.NgayDat
+        </td>
+        <td>
+            @item.Status
+        </td>
+        <td>
+            @item.StatusPayment
+        <td>
+
+            @if (item.Status == "Chưa xác nhận" || item.Status == "Đã xác nhận" || item.Status == "Đang lấy hàng")
+            {@Html.ActionLink("Chi tiết đơn hàng", "ChiTietDonHang", new { id = item.IDOrder }, new { @class = "btn btn-success btn-sm" })
+            @Html.ActionLink("Hủy đơn hàng", "HuyBenTheoDoi", new { id = item.IDOrder }, new { @class = "btn btn-success btn-sm" })
+
+        }
+        else if (item.Status == "Đã hủy" || item.Status == "Giao hàng thành công")
+        {
+            @Html.ActionLink("Chi tiết đơn hàng", "ChiTietDonHang", new { id = item.IDOrder }, new { @class = "btn btn-success btn-sm" })
+        }
+        else if (item.Status == "Đang giao")
+        {
+            @Html.ActionLink("Xác nhận đơn hàng", "XacNhanTheoDoi", new { id = item.IDOrder }, new { @class = "btn btn-warning btn-sm" })
+
+        }
+        </td>
+    </tr>
+        }
+
+        @if (Model.Count() == 0)
+        {
+            <tr>
+                <td style="text-align: center; background-color: #3366cc; color: white; font-weight: bold;font-size: 20px; padding: 10px;" colspan="9">
+                    Không tìm thấy kết quả phù hợp.
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+<style>
+    .btnTimkiem_theodoidonhang {
+        width: 86px;
+        /*left: 390px;*/
+        position: absolute;
+    }
+</style>

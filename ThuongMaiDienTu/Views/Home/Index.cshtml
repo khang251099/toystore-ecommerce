@@ -1,0 +1,70 @@
+﻿@model IEnumerable<ThuongMaiDienTu.Models.Product>
+@{
+    ViewBag.Title = "BOOKSTORE | HOME";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+    <div>
+        @Html.Partial("Carousel", "Home")
+        <div class="web_body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3">
+                        @Html.Partial("MenuIndex", "Home")
+                    </div>
+
+                    <div class="col-sm-9">
+                        @Html.Action("Arrival", "Home")
+                        @Html.Action("SanPhamSale", "Home")
+                    </div>
+                    <div class="col-sm-9">
+
+                    </div>
+
+                </div>
+            </div>
+            @*<div style="background-color:#BDD454">
+
+                <h2 style="text-align:center; color:white;padding-top:50px;font-size:50px"><b>Tại sao nên mua?</b></h2>
+
+                <div class="container" style="padding-bottom:50px;padding-top:25px">
+                    <div class="column">
+                        <div style="background-color:white;padding-left:10px;padding-right:10px;padding-bottom:20px;padding-top:20px">
+                            <p style="color:red;font-size:40px"><b>Calasu</b></p>
+                            <p><b> Hàng cao cấp chính hãng</b></p>
+                            <p> Calasu luôn được bình chọn là thương hiệu đồ chơi ưa thích tại Việt Nam</p>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div style="background-color:white;padding-left:10px;padding-right:10px;padding-bottom:20px;padding-top:20px">
+                            <p style="color:red;font-size:40px"><b>50% Off</b></p>
+                            <p><b> Sale vơi số lượng có hạn</b></p>
+                            <p> Chỉ diễn ra cuối năm, giới hạn chỉ 1000 sản phẩm sẵn trong kho</p>
+                        </div>
+                    </div>
+
+                    <div class="column">
+                        <div style="background-color:white;padding-left:10px;padding-right:10px;padding-bottom:20px;padding-top:20px">
+                            <p style="color:red;font-size:40px"><b>Free ship</b></p>
+                            <p><b> Nhận sản phẩm trong 24h</b></p>
+                            <p> Hoàn toàn miễn phí ship trong nội thành với đơn hàng từ 500k</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>*@
+        </div>
+        <script>
+            $('a').on('click', function () {
+                var target = $(this).attr('rel');
+                $("#" + target).show().siblings("div").hide();
+            });
+        </script>
+    </div>
+    @*<style>
+        .column {
+            float: left;
+            width: 33.33%;
+            padding: 10px;
+        }
+    </style>*@
