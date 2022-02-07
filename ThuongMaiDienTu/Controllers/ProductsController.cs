@@ -18,7 +18,7 @@ namespace ThuongMaiDienTu.Controllers
     public class ProductsController : Controller
     {
         
-        private TOYSTORE_MODELEntities7 db = new TOYSTORE_MODELEntities7();
+        private TOYSTORE_MODELEntities3 db = new TOYSTORE_MODELEntities3();
 
         // GET: Products
         public ActionResult Index(string search, int? page)
@@ -214,7 +214,21 @@ namespace ThuongMaiDienTu.Controllers
         {
             return View(db.BestSeller_1.OrderByDescending(m => m.BestSell).ToList());
         }
-
+        public ActionResult DoanhThuMotNgay()
+        {
+            var today = DateTime.Now.Day;
+            var doanhThu = db.Orders.Where(s => s.NgayDat.Value.Day==today);
+            var dt = doanhThu.Sum(m => m.ThanhTien);
+            if (dt != null)
+            {
+                ViewData["DoanhThuMotNgay"] = dt.ToString();
+            }
+            else
+            {
+                ViewData["DoanhThuMotNgay"]="Chưa có";
+            }
+            return View();
+        }
         public ActionResult MostRevenue()
         {
             return PartialView(db.BestSeller_1.OrderByDescending(m => m.ThuVe).ToList());
@@ -240,8 +254,8 @@ namespace ThuongMaiDienTu.Controllers
         }
         public ActionResult GetHinhThucThanhToan()
         {
-            int payPal = db.Orders.Where(s => s.IDMethod == 1).Count();
-            int shipCOD = db.Orders.Where(s => s.IDMethod == 2).Count();
+            int payPal = db.Orders.Where(s => s.IDMethod == 2).Count();
+            int shipCOD = db.Orders.Where(s => s.IDMethod == 1).Count();
             HinhThucThanhToan ht = new HinhThucThanhToan();
 
             ht.Paypal = payPal;
@@ -262,11 +276,13 @@ namespace ThuongMaiDienTu.Controllers
         public ActionResult DoanhThu()
         {
             ViewData["TongDoanhThu"] = db.Orders.Where(s=>s.Status == "Giao hàng thành công").Sum(s=>s.ThanhTien.Value).ToString("N0");
+            ViewData["TongPayPal"] = db.Orders.Where(s => s.Status == "Giao hàng thành công" && s.IDMethod == 2).Sum(s => s.ThanhTien.Value).ToString("N0");
+            ViewData["TongShipCOD"] = db.Orders.Where(s => s.Status == "Giao hàng thành công" && s.IDMethod == 1).Sum(s => s.ThanhTien.Value).ToString("N0");
             return View();
         }
         public ActionResult DoanhThuTheoNgay()
         {
-            var query = db.Orders.Include("DonHang")
+            var query = db.Orders.Include("DoanhThu")
                .GroupBy(m => m.NgayDat.Value.Day)
                .Select(s => new { name = s.Key, count = s.Sum(m => m.OrderDetails.Where(x=>x.Order.Status == "Giao hàng thành công").Sum(x => x.Order.ThanhTien)) }).ToList();
             return Json(query, JsonRequestBehavior.AllowGet);
@@ -310,6 +326,55 @@ namespace ThuongMaiDienTu.Controllers
             public int Paypal { get; set; }
             public int ShipCOD { get; set; }
 
+        }
+        //Thống kê doanh thu
+        public ActionResult Income(DateTime? fromDate, DateTime? toDate)
+        {
+            var result = from or in db.Orders
+                         join odt in db.OrderDetails on or.IDOrder equals odt.IDOrder into t
+                         from odt in t.DefaultIfEmpty()
+                         select new InCome
+                         {
+                             NgayDat = or.NgayDat,
+                             IDOrder = odt.IDOrder,
+                             IDKhachHang= or.IDKhachHang,
+                             Quanity = t.Sum(s => s.Quantity),
+                             Price = t.Sum(s => s.Order.ThanhTien)
+                         };
+            var order = result.OrderByDescending(m => m.NgayDat);
+            if (!fromDate.HasValue) fromDate = DateTime.Now.Date;
+            if (!toDate.HasValue) toDate = fromDate.GetValueOrDefault(DateTime.Now.Date).Date.AddDays(1);
+            if (toDate <= fromDate) toDate = fromDate.GetValueOrDefault(DateTime.Now.Date).Date.AddDays(1);
+            ViewBag.fromDate = fromDate;
+            ViewBag.toDate = toDate;
+            var search = order.Where(c => c.NgayDat >= fromDate && c.NgayDat <= toDate).ToList();
+            return View(search);
+        }
+        //public ActionResult TrangThaiDonHang()
+        //{
+        //    var query = db.Orders.Include("DoanhThu")
+        //       .GroupBy(m => m.NgayDat.Value.Day)
+        //       .Select(s => new { name = s.Key, count = s.Sum(x=>x.(bool)Status=="Chưa xác nhận" && x.Status=="Đã xác nhận" && x.Status == "Đang lấy hàng" && x.Status == "Đang giao" && x.Status == "Giao hàng thành công" ) }).ToList();
+        //    return Json(query, JsonRequestBehavior.AllowGet);
+        //}
+
+        public ActionResult SortNgay(DateTime? fromDate, DateTime? toDate)
+        {
+
+            if (!fromDate.HasValue)
+                fromDate = DateTime.Now.Date;
+            if (!toDate.HasValue)
+                toDate = fromDate.GetValueOrDefault(DateTime.Now.Date).Date.AddDays(1);
+            if (toDate < fromDate)
+                toDate = fromDate.GetValueOrDefault(DateTime.Now.Date).Date.AddDays(1);
+
+            ViewBag.fromDate = fromDate;
+            ViewBag.toDate = toDate;
+
+            var day = db.Orders
+                      .Where(c => c.NgayDat >= fromDate && c.NgayDat < toDate && c.Status == "Giao hàng thành công")
+                      .ToList();
+            return View(day);
         }
     }
 }

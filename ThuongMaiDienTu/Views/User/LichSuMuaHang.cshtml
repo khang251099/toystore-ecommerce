@@ -33,38 +33,50 @@
                 Tên sản phẩm
             </th>
             <th>Hình sản phẩm</th>
-          
-          
+
+
             <th>
                 Tổng tiền
             </th>
             <th>
                 Địa chỉ
             </th>
+            <th>
+
+            </th>
         </tr>
 
         @foreach (var item in Model)
         {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.IDOrder)
-        </td>
-        <td>
-            @item.Order.NgayDat
-        </td>
-        <td>
-            @item.Product.ProductName
-        </td>
-        <td> <img src="~/Contents/Image/Toy/@item.Product.Images" style="height: 100px; width: auto; " id="previewImage" />
-        </td>
-        <td>
-            @item.Order.ThanhTien
-        </td>
-        <td>
-            @item.Order.DiaChi_Cus
-        </td>
-
-    </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IDOrder)
+                </td>
+                <td>
+                    @item.Order.NgayDat
+                </td>
+                <td>
+                    @item.Product.ProductName
+                </td>
+                <td>
+                    <img src="~/Contents/Image/Toy/@item.Product.Images" style="height: 100px; width: auto; " id="previewImage" />
+                </td>
+                <td>
+                    @item.Order.ThanhTien
+                </td>
+                <td>
+                    @item.Order.DiaChi_Cus
+                </td>
+                <td>@Html.ActionLink("Chi tiết đơn hàng", "ChiTietDonHang", new { id = item.IDOrder }, new { @class = "btn btn-success btn-sm" })</td>
+            </tr>
+        }
+        @if (Model.Count() == 0)
+        {
+            <tr>
+                <td style="text-align: center; background-color: #3366cc; color: white; font-weight: bold;font-size: 20px; padding: 10px;" colspan="9">
+                    Không tìm thấy kết quả phù hợp.
+                </td>
+            </tr>
         }
     </table>
 </div>

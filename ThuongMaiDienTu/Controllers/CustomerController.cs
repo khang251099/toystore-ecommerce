@@ -14,7 +14,7 @@ namespace ThuongMaiDienTu.Controllers
 {
     public class CustomerController : Controller
     {
-        TOYSTORE_MODELEntities7 _db = new TOYSTORE_MODELEntities7();
+        TOYSTORE_MODELEntities3 _db = new TOYSTORE_MODELEntities3();
         // GET: Customer
         public ActionResult Index(string search, int? page)
         {
@@ -84,6 +84,20 @@ namespace ThuongMaiDienTu.Controllers
             }
         }
        
+
+        //public ActionResult KhachHangVangLai(int id)
+        //{
+        //    if(Session["IDUser"]!=null)
+        //    {
+        //        return View(_db.KhachHangs.Where(s => s.IDKhachHang == id).FirstOrDefault());
+        //    }    
+        //    else
+        //    {
+        //        return View(_db.Orders.Where(s => s.IDKhachHang == id).FirstOrDefault());
+
+        //    }    
+        //    //return View(_db.Orders.Where(s => s.IDKhachHang != (int)Session["IDUser"]).FirstOrDefault());
+        //}
 
     }
      

@@ -20,7 +20,9 @@ namespace ThuongMaiDienTu.Models
         public KhachHang()
         {
             this.DanhGias = new HashSet<DanhGia>();
+            this.ForgotPasswords = new HashSet<ForgotPassword>();
             this.GioHangs = new HashSet<GioHang>();
+            this.InComes = new HashSet<InCome>();
             this.LienHes = new HashSet<LienHe>();
             this.Orders = new HashSet<Order>();
             this.VoteLogs = new HashSet<VoteLog>();
@@ -33,20 +35,24 @@ namespace ThuongMaiDienTu.Models
         public string PasswordKH { get; set; }
         public string Phone_Cus { get; set; }
         public string DiaChi_Cus { get; set; }
-        public Nullable<int> RankID { get; set; }
-        public string RankName { get; set; }
-        public Nullable<int> PointKH { get; set; }
         [NotMapped]
         [Compare("PasswordKH", ErrorMessage = "Mật khẩu không trùng khớp")]
         [Display(Name = "Xác nhận mật khẩu")]
         public string ConfirmPassword { get; set; }
         [NotMapped]
         public string LogInErrorMessage { get; set; }
-
+        public Nullable<int> RankID { get; set; }
+        public string RankName { get; set; }
+        public Nullable<int> PointKH { get; set; }
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DanhGia> DanhGias { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ForgotPassword> ForgotPasswords { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GioHang> GioHangs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<InCome> InComes { get; set; }
         public virtual RankKH RankKH { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LienHe> LienHes { get; set; }

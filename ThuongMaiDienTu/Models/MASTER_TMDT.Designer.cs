@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Hihihehehe (1)\Hihihehehe\Hihihehehe\ThuongMaiDienTu\ThuongMaiDienTu\Models\TMDT_DB_TOYSTORE.edmx'. 
+﻿// T4 code generation is enabled for model 'E:\MASTER_TMDT\ThuongMaiDienTu\ThuongMaiDienTu\Models\MASTER_TMDT.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

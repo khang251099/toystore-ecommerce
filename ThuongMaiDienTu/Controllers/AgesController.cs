@@ -12,7 +12,7 @@ namespace ThuongMaiDienTu.Controllers
 {
     public class AgesController : Controller
     {
-        private TOYSTORE_MODELEntities7 db = new TOYSTORE_MODELEntities7();
+        private TOYSTORE_MODELEntities3 db = new TOYSTORE_MODELEntities3();
 
         // GET: Ages
         public ActionResult Index()

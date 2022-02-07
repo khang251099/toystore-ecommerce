@@ -12,11 +12,18 @@ namespace ThuongMaiDienTu.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class HopThu
+    public partial class InCome
     {
-        public int IDHopThu { get; set; }
+        public int IDInCome { get; set; }
+        public Nullable<int> IDOrder { get; set; }
+        public Nullable<System.DateTime> NgayDat { get; set; }
+        public Nullable<int> IDOrderDetail { get; set; }
+        public Nullable<int> Quanity { get; set; }
         public Nullable<int> IDKhachHang { get; set; }
-        public string Email { get; set; }
-        public string SendText { get; set; }
+        public Nullable<double> Price { get; set; }
+    
+        public virtual KhachHang KhachHang { get; set; }
+        public virtual Order Order { get; set; }
+        public virtual OrderDetail OrderDetail { get; set; }
     }
 }

@@ -6,178 +6,185 @@
 }
 
 <html>
-<head>
-    <script>
-        $(document).ready(function () {
-            $('#dataTables').DataTable({
-                dom: 'Bfrtip',
-                buttons: [
-                    'copy', 'csv', 'excel', 'pdf', 'print'
-                ]
-            });
-        });
-    </script>
-  
-</head>
 <body>
     <div class="container">
         <h1>Báo cáo & Thống kê</h1>
-
-        <div class="row" style="background-color: #e8e8e8">
-            <div class="col-md-12" style="margin-left:40px">
-                @Html.Action("DoanhThu", "Products")
-                @Html.Action("TongSoDoChoiBanRa", "Products")
-                @Html.Action("TongDonHang", "Products")
-            </div>
+        <div class="col-md-12" style="padding-left: 0;">
+           
+            <a class="btn btn-default" href="@Url.Action("SortNgay", "Products")" style="margin: 30px 0 30px 0">
+               Lọc doanh thu theo ngày
+            </a>
         </div>
 
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            @foreach (var item in Model.Take(1))
-            {
-                <div class="thumbnail text-center" style="font-weight: bold">
-                    <h3>SẢN PHẨM BÁN CHẠY NHẤT</h3>
-                    <img src="~/Contents/Image/Toy/@item.Images" style="height: 100px; width: auto; margin-bottom: 20px;" id="previewImage" />
-                    <p>@Html.DisplayFor(s => item.ProductName)</p>
-                    <p>Số lượng: @Html.DisplayFor(s => item.BestSell)</p>
-                    <p style="color: red">Doanh thu: @Html.DisplayFor(s => item.ThuVe) <sup>VNĐ</sup></p>
+            <div class="row" style="background-color: #e8e8e8">
+                <div class="col-md-12" style="margin-left:40px">
+                    @Html.Action("DoanhThu", "Products")
+                    @Html.Action("TongSoDoChoiBanRa", "Products")
+                    @Html.Action("TongDonHang", "Products")
                 </div>
-            }
-        </div>
-        <div class="col-md-6">
-            @Html.Action("MostRevenue", "Products")
-        </div>
-    </div>
-    @*<div>
-        <script>
-            $(document).ready(function () {
-                $.getJSON("/Products/GetHinhThucThanhToan", function (data) {
-                    Highcharts.chart('container2', {
-                        chart: {
-                            plotBackgroundColor: null,
-                            plotBorderWidth: null,
-                            plotShadow: false,
-                            type: 'pie'
-                        },
-                        title: {
-                            text: 'Tỷ lệ hình thức thanh toán đơn hàng'
-                        },
-                        tooltip: {
-                            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                        },
-                        plotOptions: {
-                            pie: {
-                                allowPointSelect: true,
-                                cursor: 'pointer',
-                                dataLabels: {
-                                    enabled: true,
-                                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                                    style: {
-                                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                                    }
-                                }
-                            }
-                        },
-                        series: [{
-                            name: 'Hình thức thanh toán',
-                            colorByPoint: true,
-                            data: [{
-                                name: 'ShipCOD',
-                                y: data.Paypal
-                            }, {
-                                name: 'Paypal',
-                                y: data.ShipCOD
-                            }, {
+            </div>
 
-                            }]
-                        }]
-                    });
-                });
-            });
-        </script>
-    </div>*@
-
-    <div class="container" style="margin-top: 30px; padding: 30px; background-color: #e8e8e8">
-
-        <div class="row thumbnail">
-            @Html.Partial("DoanhThuTheoThang", "Products")
         </div>
 
 
-        <div class="jumbotron" id="dattaTables">
-            <div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto;">
+
+        <div class="container" style="margin-top: 30px; padding: 30px; background-color: #e8e8e8">
+            <div class="row">
+                <div class="col-md-6">
+                    @foreach (var item in Model.Take(1))
+                    {
+                        <div class="thumbnail text-center" style="font-weight: bold">
+                            <h3>SẢN PHẨM BÁN CHẠY NHẤT</h3>
+                            <img src="~/Contents/Image/Toy/@item.Images" style="height: 100px; width: auto; margin-bottom: 20px;" id="previewImage" />
+                            <p>@Html.DisplayFor(s => item.ProductName)</p>
+                            <p>Số lượng: @Html.DisplayFor(s => item.BestSell)</p>
+                            <p style="color: red">Doanh thu: @Html.DisplayFor(s => item.ThuVe) <sup>VNĐ</sup></p>
+                        </div>
+                    }
+                </div>
+                <div class="col-md-6">
+                    @Html.Action("MostRevenue", "Products")
+                </div>
+            </div>
+            <div class="container">
+                <div class="row thumbnail">
+                    @Html.Partial("DoanhThuTheoThang", "Products")
+                </div>
+            </div>
+
+            <div>
+                <div class="row thumbnail">
+                    @Html.Partial("DoanhThuTheoNgay", "Products")
+                </div>
+            </div>
+            <div>
+                <div class="row thumbnail">
+                    @Html.Partial("HinhThucThanhToan", "Products")
+                </div>
+            </div>
+
+            <div class="jumbotron" id="dattaTables">
+                <div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto;">
+
+                </div>
+                <div style="text-align: center; margin-top: 20px">
+                    Dữ liệu được cập nhật vào lúc @DateTime.Now
+                </div>
+            </div>
+            <div>
 
             </div>
-            <div style="text-align: center; margin-top: 20px">
-                Dữ liệu được cập nhật vào lúc @DateTime.Now
-            </div>
-        </div>
-        <div>
 
         </div>
 
-    </div>
-    <div class="container" style="margin-top: 30px; padding: 30px; background-color: #e8e8e8">
+        <div class="container" style="margin-top: 30px; padding: 30px; background-color: #e8e8e8">
 
-        <script>
-            $(document).ready(function () {
-                $.getJSON("/Products/GetData", function (data) {
-                    Highcharts.chart('container', {
-                        chart: {
-                            plotBackgroundColor: null,
-                            plotBorderWidth: null,
-                            plotShadow: false,
-                            type: 'pie'
-                        },
-                        title: {
-                            text: 'Tỷ lệ sản phẩm bán ra theo đơn hàng'
-                        },
-                        tooltip: {
-                            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                        },
-                        plotOptions: {
-                            pie: {
-                                allowPointSelect: true,
-                                cursor: 'pointer',
-                                dataLabels: {
-                                    enabled: true,
-                                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                                    style: {
-                                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+            <script>
+                $(document).ready(function () {
+                    $.getJSON("/Products/GetData", function (data) {
+                        Highcharts.chart('container', {
+                            chart: {
+                                plotBackgroundColor: null,
+                                plotBorderWidth: null,
+                                plotShadow: false,
+                                type: 'pie'
+                            },
+                            title: {
+                                text: 'Tỷ lệ sản phẩm bán ra theo đơn hàng'
+                            },
+                            tooltip: {
+                                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                            },
+                            plotOptions: {
+                                pie: {
+                                    allowPointSelect: true,
+                                    cursor: 'pointer',
+                                    dataLabels: {
+                                        enabled: true,
+                                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                        style: {
+                                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                        }
                                     }
                                 }
-                            }
-                        },
-                        series: [{
-                            name: 'Loại đồ chơi',
-                            colorByPoint: true,
-                            data: [{
-                                name: 'Đồ chơi trí tuệ',
-                                y: data.DoChoiTriTue
-                            }, {
-                                name: 'Máy bay điều khiển',
-                                y: data.MayBayDieuKhien
-                            }, {
-                                name: 'Đồ chơi xếp hình',
-                                y: data.DoChoiXepHinh
-                            }, {
-                                name: 'Đồ chơi búp bê',
-                                y: data.DoChoiBupBe
-                            }, {
-                                name: 'Xe công trình',
-                                y: data.XeCongTrinh
-                            }, {
-                                name: 'Xe đạp',
-                                y: data.XeDap
+                            },
+                            series: [{
+                                name: 'Loại đồ chơi',
+                                colorByPoint: true,
+                                data: [{
+                                    name: 'Đồ chơi trí tuệ',
+                                    y: data.DoChoiTriTue
+                                }, {
+                                    name: 'Máy bay điều khiển',
+                                    y: data.MayBayDieuKhien
+                                }, {
+                                    name: 'Đồ chơi xếp hình',
+                                    y: data.DoChoiXepHinh
+                                }, {
+                                    name: 'Đồ chơi búp bê',
+                                    y: data.DoChoiBupBe
+                                }, {
+                                    name: 'Xe công trình',
+                                    y: data.XeCongTrinh
+                                }, {
+                                    name: 'Xe đạp',
+                                    y: data.XeDap
+                                }]
                             }]
-                        }]
+                        });
                     });
                 });
-            });
-        </script>
-    </div>
+            </script>
+        </div>
 
+        @*<div class="container9" style="margin-top: 30px; padding: 30px; background-color: #e8e8e8">
+
+            <script>
+                $(document).ready(function () {
+                    $.getJSON("/Products/GetHinhThucThanhToan", function (data) {
+                        Highcharts.chart('container9', {
+                            chart: {
+                                plotBackgroundColor: null,
+                                plotBorderWidth: null,
+                                plotShadow: false,
+                                type: 'pie'
+                            },
+                            title: {
+                                text: 'Tỷ lệ phương thức thanh toán của khách hàng'
+                            },
+                            tooltip: {
+                                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                            },
+                            plotOptions: {
+                                pie: {
+                                    allowPointSelect: true,
+                                    cursor: 'pointer',
+                                    dataLabels: {
+                                        enabled: true,
+                                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                        style: {
+                                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                        }
+                                    }
+                                }
+                            },
+                            series: [{
+                                name: 'Loại hình thức thanh toán',
+                                colorByPoint: true,
+                                data: [{
+                                    name: 'Paypal',
+                                    y: data.Paypal
+                                }, {
+                                    name: 'ShipCOD',
+                                        y: data.ShipCOD
+                                },
+                                }]
+                            }]
+                        });
+                    });
+                });
+            </script>
+        </div>*@
 
 </body>
 </html>

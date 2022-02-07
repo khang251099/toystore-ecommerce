@@ -10,14 +10,16 @@ using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using ThuongMaiDienTu.Models;
+using ThuongMaiDienTu.Models.ViewModel;
 
 namespace ThuongMaiDienTu.Controllers
 {
     public class UserController : Controller
     {
         // GET: User
-        TOYSTORE_MODELEntities7 db = new TOYSTORE_MODELEntities7();
+        TOYSTORE_MODELEntities3 db = new TOYSTORE_MODELEntities3();
         // GET: SignIn
         public ActionResult Index()
         {
@@ -91,6 +93,83 @@ namespace ThuongMaiDienTu.Controllers
             Session.Abandon();
             return RedirectToAction("Index", "Home");
         }
+        // POST: CustomerAccount/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        //public ActionResult ChangePassword(long? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    KhachHang customer = db.KhachHangs.Find(id);
+        //    if (customer == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(customer);
+        //}
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult ChangePassword([Bind(Include = "IDKhachHang, PasswordKH, ConfirmPassword,FullName,UserName ,Email, Address_Cus, Phone_Cus,DiaChi_Cus,RankID,RankName,PointKH")] KhachHang customer)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(customer).State = EntityState.Modified;
+               
+              
+        //        if (customer.FullName == null)
+        //            db.Entry(customer).Property(m => m.FullName).IsModified = false;
+                
+        //        if (customer.Email == null)
+        //            db.Entry(customer).Property(m => m.Email).IsModified = false;
+        //        if (customer.DiaChi_Cus == null)
+        //            db.Entry(customer).Property(m => m.DiaChi_Cus).IsModified = false;
+        //        if (customer.Phone_Cus == null)
+        //            db.Entry(customer).Property(m => m.Phone_Cus).IsModified = false;
+        //        if (customer.PointKH == null)
+        //        {
+        //            db.Entry(customer).Property(m => m.PointKH).IsModified = false;
+        //        }
+
+        //        db.SaveChanges();
+        //        return RedirectToAction("SignIn" + customer.IDKhachHang);
+        //    }
+        //    return View(customer);
+        //}
+        public ActionResult ForgotPassword()
+        { return View(); }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ForgotPassword(KhachHang kh)
+        {
+            var check = db.KhachHangs.AsNoTracking().Where(x => x.Email == kh.Email).FirstOrDefault();
+            if (check == null)
+            {
+                return Content("Tài khoản chưa có trong hệ thống, vui lòng hãy tạo tài khoản!!!!!");
+            }
+            else
+            {
+                using (var db2 = new TOYSTORE_MODELEntities3())
+                {
+                    string password = Membership.GeneratePassword(7, 1);
+                    check.PasswordKH = password;
+                    check.ConfirmPassword = password;
+                    db2.Entry(check).State = EntityState.Modified;
+                    db2.SaveChanges();
+                }
+              
+            }
+            string content = System.IO.File.ReadAllText(Server.MapPath("~/Contents/Client/SendMailForgotpass.html"));
+            content = content.Replace("{{Name}}", check.FullName.ToString());
+            content = content.Replace("{{Email}}", check.Email.ToString());
+            content = content.Replace("{{Password}}", check.PasswordKH);
+            var toMail = check.Email;
+            new Mail().SendMail(toMail, "Quên mật khẩu", content);
+            return RedirectToAction("SignIn");
+        }
+
         public ActionResult OrderHistory()
         {
             string email = Session["Email"].ToString();
@@ -105,8 +184,11 @@ namespace ThuongMaiDienTu.Controllers
                          select m;
             return View(result.ToList());
         }
-
-
+        public ActionResult LichSuMuaHangHVL(string search)
+        {
+            
+            return PartialView(db.OrderDetails.Where(s => s.Order.Phone_Cus == search && s.Order.Status == "Giao hàng thành công ").ToList());
+        }
 
         public ActionResult LichSuMuaHang()
         {
@@ -121,7 +203,6 @@ namespace ThuongMaiDienTu.Controllers
             return PartialView(db.OrderDetails.Where(s => s.Order.IDKhachHang == id && s.Order.Status=="Chưa xác nhận").ToList());
         }
         
-
 
         public ActionResult DaXacNhan()
         {
@@ -194,8 +275,11 @@ namespace ThuongMaiDienTu.Controllers
                 var query1 = "UPDATE KhachHang SET RankID = 2 WHERE IDKhachHang = @ma";
                 db.Database.ExecuteSqlCommand(query1, new SqlParameter("@ma", user.IDKhachHang));  
             }
+
             db.SaveChanges();
             Session["RankID"] = user.RankID;
+           
+
             return RedirectToAction("GiaoHangThanhCong");
         }
         public ActionResult SuccessfullyDelivery(int id, Product pro)
@@ -229,6 +313,21 @@ namespace ThuongMaiDienTu.Controllers
             { order.Status = "Đã hủy";
                 db.Entry(order).State = EntityState.Modified;
             }
+            if(order!=null)
+            {
+                var orderDetails = db.OrderDetails.Where(s => s.IDOrder == order.IDOrder);
+            foreach (var item in orderDetails)
+                {
+                    //var sp = db.Products.Where(m => m.IDProduct == item.IDProduct).FirstOrDefault();
+                    //sp.SoLuong += item.Product.SoLuong;
+                    Product sp = db.Products.Find(item.IDProduct);
+                    sp.SoLuong = sp.SoLuong + item.Quantity;
+                    //db.Entry(sp).State = System.Data.Entity.EntityState.Modified;// Cập nhật số lượng theo sản phẩm
+                    
+                }
+            }    
+           
+     
             db.SaveChanges();
             return RedirectToAction("Details","User");
         }
@@ -242,7 +341,22 @@ namespace ThuongMaiDienTu.Controllers
             {
                 order.Status = "Đã hủy";
                 db.Entry(order).State = EntityState.Modified;
+                db.SaveChanges();
             }
+            if (order != null)
+            {
+                var orderDetails = db.OrderDetails.Where(s => s.IDOrder == order.IDOrder);
+                foreach (var item in orderDetails)
+                {
+                    //var sp = db.Products.Where(m => m.IDProduct == item.IDProduct).FirstOrDefault();
+                    //sp.SoLuong += item.Product.SoLuong;
+                    Product sp = db.Products.Find(item.IDProduct);
+                    sp.SoLuong = sp.SoLuong + item.Quantity;
+                    //db.Entry(sp).State = System.Data.Entity.EntityState.Modified;// Cập nhật số lượng theo sản phẩm
+
+                }
+            }
+
             db.SaveChanges();
             return RedirectToAction("HuyRoiDoTroi", "User");
         }

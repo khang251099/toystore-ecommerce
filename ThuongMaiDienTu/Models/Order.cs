@@ -17,6 +17,7 @@ namespace ThuongMaiDienTu.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Order()
         {
+            this.InComes = new HashSet<InCome>();
             this.OrderDetails = new HashSet<OrderDetail>();
             this.Shippings = new HashSet<Shipping>();
         }
@@ -43,6 +44,8 @@ namespace ThuongMaiDienTu.Models
         public Nullable<double> ThanhTien { get; set; }
     
         public virtual GioHang GioHang { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<InCome> InComes { get; set; }
         public virtual KhachHang KhachHang { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }

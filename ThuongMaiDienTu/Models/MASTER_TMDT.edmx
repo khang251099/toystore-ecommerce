@@ -50,6 +50,16 @@
           <Property Name="NgayDanhGia" Type="datetime" />
           <Property Name="Content" Type="nvarchar" MaxLength="500" />
         </EntityType>
+        <EntityType Name="ForgotPassword">
+          <Key>
+            <PropertyRef Name="IDFG" />
+          </Key>
+          <Property Name="IDFG" Type="int" Nullable="false" />
+          <Property Name="IDKhachHang" Type="int" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="GioHang">
           <Key>
             <PropertyRef Name="IDGioHang" />
@@ -64,14 +74,17 @@
           <Property Name="TongTien" Type="int" />
           <Property Name="TongSanPham" Type="int" />
         </EntityType>
-        <EntityType Name="HopThu">
+        <EntityType Name="InCome">
           <Key>
-            <PropertyRef Name="IDHopThu" />
+            <PropertyRef Name="IDInCome" />
           </Key>
-          <Property Name="IDHopThu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDInCome" Type="int" Nullable="false" />
+          <Property Name="IDOrder" Type="int" />
+          <Property Name="NgayDat" Type="datetime" />
+          <Property Name="IDOrderDetail" Type="int" />
+          <Property Name="Quanity" Type="int" />
           <Property Name="IDKhachHang" Type="int" />
-          <Property Name="Email" Type="nvarchar" MaxLength="50" />
-          <Property Name="SendText" Type="nvarchar(max)" />
+          <Property Name="Price" Type="float" />
         </EntityType>
         <EntityType Name="KhachHang">
           <Key>
@@ -280,6 +293,18 @@ warning 6002: The table/view 'TOYSTORE_MODEL.dbo.BestSeller_1' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__ForgotPas__IDKha__29221CFB">
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
+          <End Role="ForgotPassword" Type="Self.ForgotPassword" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="IDKhachHang" />
+            </Principal>
+            <Dependent Role="ForgotPassword">
+              <PropertyRef Name="IDKhachHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__GioHang__IDKhach__2A4B4B5E">
           <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
           <End Role="GioHang" Type="Self.GioHang" Multiplicity="*" />
@@ -301,6 +326,42 @@ warning 6002: The table/view 'TOYSTORE_MODEL.dbo.BestSeller_1' does not have a p
             </Principal>
             <Dependent Role="GioHang">
               <PropertyRef Name="IDProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__InCome__IDKhachH__2DE6D218">
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
+          <End Role="InCome" Type="Self.InCome" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="IDKhachHang" />
+            </Principal>
+            <Dependent Role="InCome">
+              <PropertyRef Name="IDKhachHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__InCome__IDOrder__2BFE89A6">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+          <End Role="InCome" Type="Self.InCome" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="IDOrder" />
+            </Principal>
+            <Dependent Role="InCome">
+              <PropertyRef Name="IDOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__InCome__IDOrderD__2CF2ADDF">
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="0..1" />
+          <End Role="InCome" Type="Self.InCome" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderDetail">
+              <PropertyRef Name="IDOrderDetail" />
+            </Principal>
+            <Dependent Role="InCome">
+              <PropertyRef Name="IDOrderDetail" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -490,8 +551,9 @@ warning 6002: The table/view 'TOYSTORE_MODEL.dbo.BestSeller_1' does not have a p
           <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DanhGia" EntityType="Self.DanhGia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ForgotPassword" EntityType="Self.ForgotPassword" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GioHang" EntityType="Self.GioHang" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="HopThu" EntityType="Self.HopThu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InCome" EntityType="Self.InCome" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KhachHang" EntityType="Self.KhachHang" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LienHe" EntityType="Self.LienHe" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
@@ -527,6 +589,10 @@ warning 6002: The table/view 'TOYSTORE_MODEL.dbo.BestSeller_1' does not have a p
             <End Role="Product" EntitySet="Product" />
             <End Role="DanhGia" EntitySet="DanhGia" />
           </AssociationSet>
+          <AssociationSet Name="FK__ForgotPas__IDKha__29221CFB" Association="Self.FK__ForgotPas__IDKha__29221CFB">
+            <End Role="KhachHang" EntitySet="KhachHang" />
+            <End Role="ForgotPassword" EntitySet="ForgotPassword" />
+          </AssociationSet>
           <AssociationSet Name="FK__GioHang__IDKhach__2A4B4B5E" Association="Self.FK__GioHang__IDKhach__2A4B4B5E">
             <End Role="KhachHang" EntitySet="KhachHang" />
             <End Role="GioHang" EntitySet="GioHang" />
@@ -534,6 +600,18 @@ warning 6002: The table/view 'TOYSTORE_MODEL.dbo.BestSeller_1' does not have a p
           <AssociationSet Name="FK__GioHang__IDProdu__2B3F6F97" Association="Self.FK__GioHang__IDProdu__2B3F6F97">
             <End Role="Product" EntitySet="Product" />
             <End Role="GioHang" EntitySet="GioHang" />
+          </AssociationSet>
+          <AssociationSet Name="FK__InCome__IDKhachH__2DE6D218" Association="Self.FK__InCome__IDKhachH__2DE6D218">
+            <End Role="KhachHang" EntitySet="KhachHang" />
+            <End Role="InCome" EntitySet="InCome" />
+          </AssociationSet>
+          <AssociationSet Name="FK__InCome__IDOrder__2BFE89A6" Association="Self.FK__InCome__IDOrder__2BFE89A6">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="InCome" EntitySet="InCome" />
+          </AssociationSet>
+          <AssociationSet Name="FK__InCome__IDOrderD__2CF2ADDF" Association="Self.FK__InCome__IDOrderD__2CF2ADDF">
+            <End Role="OrderDetail" EntitySet="OrderDetail" />
+            <End Role="InCome" EntitySet="InCome" />
           </AssociationSet>
           <AssociationSet Name="FK__KhachHang__RankI__02FC7413" Association="Self.FK__KhachHang__RankI__02FC7413">
             <End Role="RankKH" EntitySet="RankKH" />
@@ -652,6 +730,17 @@ warning 6002: The table/view 'TOYSTORE_MODEL.dbo.BestSeller_1' does not have a p
           <NavigationProperty Name="KhachHang" Relationship="Self.FK__DanhGia__IDKhach__24927208" FromRole="DanhGia" ToRole="KhachHang" />
           <NavigationProperty Name="Product" Relationship="Self.FK__DanhGia__IDProdu__25869641" FromRole="DanhGia" ToRole="Product" />
         </EntityType>
+        <EntityType Name="ForgotPassword">
+          <Key>
+            <PropertyRef Name="IDFG" />
+          </Key>
+          <Property Name="IDFG" Type="Int32" Nullable="false" />
+          <Property Name="IDKhachHang" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="KhachHang" Relationship="Self.FK__ForgotPas__IDKha__29221CFB" FromRole="ForgotPassword" ToRole="KhachHang" />
+        </EntityType>
         <EntityType Name="GioHang">
           <Key>
             <PropertyRef Name="IDGioHang" />
@@ -669,14 +758,20 @@ warning 6002: The table/view 'TOYSTORE_MODEL.dbo.BestSeller_1' does not have a p
           <NavigationProperty Name="Product" Relationship="Self.FK__GioHang__IDProdu__2B3F6F97" FromRole="GioHang" ToRole="Product" />
           <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__IDGioHan__47DBAE45" FromRole="GioHang" ToRole="Orders" />
         </EntityType>
-        <EntityType Name="HopThu">
+        <EntityType Name="InCome">
           <Key>
-            <PropertyRef Name="IDHopThu" />
+            <PropertyRef Name="IDInCome" />
           </Key>
-          <Property Name="IDHopThu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDInCome" Type="Int32" Nullable="false" />
+          <Property Name="IDOrder" Type="Int32" />
+          <Property Name="NgayDat" Type="DateTime" Precision="3" />
+          <Property Name="IDOrderDetail" Type="Int32" />
+          <Property Name="Quanity" Type="Int32" />
           <Property Name="IDKhachHang" Type="Int32" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SendText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Double" />
+          <NavigationProperty Name="KhachHang" Relationship="Self.FK__InCome__IDKhachH__2DE6D218" FromRole="InCome" ToRole="KhachHang" />
+          <NavigationProperty Name="Order" Relationship="Self.FK__InCome__IDOrder__2BFE89A6" FromRole="InCome" ToRole="Orders" />
+          <NavigationProperty Name="OrderDetail" Relationship="Self.FK__InCome__IDOrderD__2CF2ADDF" FromRole="InCome" ToRole="OrderDetail" />
         </EntityType>
         <EntityType Name="KhachHang">
           <Key>
@@ -693,7 +788,9 @@ warning 6002: The table/view 'TOYSTORE_MODEL.dbo.BestSeller_1' does not have a p
           <Property Name="RankName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PointKH" Type="Int32" />
           <NavigationProperty Name="DanhGias" Relationship="Self.FK__DanhGia__IDKhach__24927208" FromRole="KhachHang" ToRole="DanhGia" />
+          <NavigationProperty Name="ForgotPasswords" Relationship="Self.FK__ForgotPas__IDKha__29221CFB" FromRole="KhachHang" ToRole="ForgotPassword" />
           <NavigationProperty Name="GioHangs" Relationship="Self.FK__GioHang__IDKhach__2A4B4B5E" FromRole="KhachHang" ToRole="GioHang" />
+          <NavigationProperty Name="InComes" Relationship="Self.FK__InCome__IDKhachH__2DE6D218" FromRole="KhachHang" ToRole="InCome" />
           <NavigationProperty Name="RankKH" Relationship="Self.FK__KhachHang__RankI__02FC7413" FromRole="KhachHang" ToRole="RankKH" />
           <NavigationProperty Name="LienHes" Relationship="Self.FK__LienHe__IDKhachH__2E1BDC42" FromRole="KhachHang" ToRole="LienHe" />
           <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__IDKhachH__30F848ED" FromRole="KhachHang" ToRole="Orders" />
@@ -720,6 +817,7 @@ warning 6002: The table/view 'TOYSTORE_MODEL.dbo.BestSeller_1' does not have a p
           <Property Name="IDProduct" Type="Int32" />
           <Property Name="UnitPrice" Type="Int32" />
           <Property Name="Quantity" Type="Int32" />
+          <NavigationProperty Name="InComes" Relationship="Self.FK__InCome__IDOrderD__2CF2ADDF" FromRole="OrderDetail" ToRole="InCome" />
           <NavigationProperty Name="Order" Relationship="Self.FK__OrderDeta__IDOrd__34C8D9D1" FromRole="OrderDetail" ToRole="Orders" />
           <NavigationProperty Name="Product" Relationship="Self.FK__OrderDeta__IDPro__35BCFE0A" FromRole="OrderDetail" ToRole="Product" />
         </EntityType>
@@ -748,6 +846,7 @@ warning 6002: The table/view 'TOYSTORE_MODEL.dbo.BestSeller_1' does not have a p
           <Property Name="TongTien" Type="Double" />
           <Property Name="ThanhTien" Type="Double" />
           <NavigationProperty Name="GioHang" Relationship="Self.FK__Orders__IDGioHan__47DBAE45" FromRole="Orders" ToRole="GioHang" />
+          <NavigationProperty Name="InComes" Relationship="Self.FK__InCome__IDOrder__2BFE89A6" FromRole="Orders" ToRole="InCome" />
           <NavigationProperty Name="KhachHang" Relationship="Self.FK__Orders__IDKhachH__30F848ED" FromRole="Orders" ToRole="KhachHang" />
           <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__IDOrd__34C8D9D1" FromRole="Orders" ToRole="OrderDetail" />
           <NavigationProperty Name="PayMethod" Relationship="Self.FK__Orders__IDMethod__31EC6D26" FromRole="Orders" ToRole="PayMethod" />
@@ -950,6 +1049,18 @@ warning 6002: The table/view 'TOYSTORE_MODEL.dbo.BestSeller_1' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__ForgotPas__IDKha__29221CFB">
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
+          <End Role="ForgotPassword" Type="Self.ForgotPassword" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="IDKhachHang" />
+            </Principal>
+            <Dependent Role="ForgotPassword">
+              <PropertyRef Name="IDKhachHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__GioHang__IDKhach__2A4B4B5E">
           <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
           <End Role="GioHang" Type="Self.GioHang" Multiplicity="*" />
@@ -983,6 +1094,42 @@ warning 6002: The table/view 'TOYSTORE_MODEL.dbo.BestSeller_1' does not have a p
             </Principal>
             <Dependent Role="Orders">
               <PropertyRef Name="IDGioHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__InCome__IDKhachH__2DE6D218">
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
+          <End Role="InCome" Type="Self.InCome" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="IDKhachHang" />
+            </Principal>
+            <Dependent Role="InCome">
+              <PropertyRef Name="IDKhachHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__InCome__IDOrder__2BFE89A6">
+          <End Role="Orders" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="InCome" Type="Self.InCome" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="IDOrder" />
+            </Principal>
+            <Dependent Role="InCome">
+              <PropertyRef Name="IDOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__InCome__IDOrderD__2CF2ADDF">
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="0..1" />
+          <End Role="InCome" Type="Self.InCome" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderDetail">
+              <PropertyRef Name="IDOrderDetail" />
+            </Principal>
+            <Dependent Role="InCome">
+              <PropertyRef Name="IDOrderDetail" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1118,14 +1265,15 @@ warning 6002: The table/view 'TOYSTORE_MODEL.dbo.BestSeller_1' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="TOYSTORE_MODELEntities7" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="TOYSTORE_MODELEntities3" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Administrators" EntityType="Self.Administrator" />
           <EntitySet Name="Ages" EntityType="Self.Age" />
           <EntitySet Name="Brands" EntityType="Self.Brand" />
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="DanhGias" EntityType="Self.DanhGia" />
+          <EntitySet Name="ForgotPasswords" EntityType="Self.ForgotPassword" />
           <EntitySet Name="GioHangs" EntityType="Self.GioHang" />
-          <EntitySet Name="HopThus" EntityType="Self.HopThu" />
+          <EntitySet Name="InComes" EntityType="Self.InCome" />
           <EntitySet Name="KhachHangs" EntityType="Self.KhachHang" />
           <EntitySet Name="LienHes" EntityType="Self.LienHe" />
           <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
@@ -1164,6 +1312,10 @@ warning 6002: The table/view 'TOYSTORE_MODEL.dbo.BestSeller_1' does not have a p
             <End Role="Product" EntitySet="Products" />
             <End Role="DanhGia" EntitySet="DanhGias" />
           </AssociationSet>
+          <AssociationSet Name="FK__ForgotPas__IDKha__29221CFB" Association="Self.FK__ForgotPas__IDKha__29221CFB">
+            <End Role="KhachHang" EntitySet="KhachHangs" />
+            <End Role="ForgotPassword" EntitySet="ForgotPasswords" />
+          </AssociationSet>
           <AssociationSet Name="FK__GioHang__IDKhach__2A4B4B5E" Association="Self.FK__GioHang__IDKhach__2A4B4B5E">
             <End Role="KhachHang" EntitySet="KhachHangs" />
             <End Role="GioHang" EntitySet="GioHangs" />
@@ -1175,6 +1327,18 @@ warning 6002: The table/view 'TOYSTORE_MODEL.dbo.BestSeller_1' does not have a p
           <AssociationSet Name="FK__Orders__IDGioHan__47DBAE45" Association="Self.FK__Orders__IDGioHan__47DBAE45">
             <End Role="GioHang" EntitySet="GioHangs" />
             <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__InCome__IDKhachH__2DE6D218" Association="Self.FK__InCome__IDKhachH__2DE6D218">
+            <End Role="KhachHang" EntitySet="KhachHangs" />
+            <End Role="InCome" EntitySet="InComes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__InCome__IDOrder__2BFE89A6" Association="Self.FK__InCome__IDOrder__2BFE89A6">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="InCome" EntitySet="InComes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__InCome__IDOrderD__2CF2ADDF" Association="Self.FK__InCome__IDOrderD__2CF2ADDF">
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
+            <End Role="InCome" EntitySet="InComes" />
           </AssociationSet>
           <AssociationSet Name="FK__KhachHang__RankI__02FC7413" Association="Self.FK__KhachHang__RankI__02FC7413">
             <End Role="RankKH" EntitySet="RankKHs" />
@@ -1226,7 +1390,7 @@ warning 6002: The table/view 'TOYSTORE_MODEL.dbo.BestSeller_1' does not have a p
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="TOYSTORE_MODELModelStoreContainer" CdmEntityContainer="TOYSTORE_MODELEntities7">
+        <EntityContainerMapping StorageEntityContainer="TOYSTORE_MODELModelStoreContainer" CdmEntityContainer="TOYSTORE_MODELEntities3">
           <EntitySetMapping Name="Administrators">
             <EntityTypeMapping TypeName="TOYSTORE_MODELModel.Administrator">
               <MappingFragment StoreEntitySet="Administrator">
@@ -1277,6 +1441,17 @@ warning 6002: The table/view 'TOYSTORE_MODEL.dbo.BestSeller_1' does not have a p
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ForgotPasswords">
+            <EntityTypeMapping TypeName="TOYSTORE_MODELModel.ForgotPassword">
+              <MappingFragment StoreEntitySet="ForgotPassword">
+                <ScalarProperty Name="IDFG" ColumnName="IDFG" />
+                <ScalarProperty Name="IDKhachHang" ColumnName="IDKhachHang" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="GioHangs">
             <EntityTypeMapping TypeName="TOYSTORE_MODELModel.GioHang">
               <MappingFragment StoreEntitySet="GioHang">
@@ -1292,13 +1467,16 @@ warning 6002: The table/view 'TOYSTORE_MODEL.dbo.BestSeller_1' does not have a p
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="HopThus">
-            <EntityTypeMapping TypeName="TOYSTORE_MODELModel.HopThu">
-              <MappingFragment StoreEntitySet="HopThu">
-                <ScalarProperty Name="IDHopThu" ColumnName="IDHopThu" />
+          <EntitySetMapping Name="InComes">
+            <EntityTypeMapping TypeName="TOYSTORE_MODELModel.InCome">
+              <MappingFragment StoreEntitySet="InCome">
+                <ScalarProperty Name="IDInCome" ColumnName="IDInCome" />
+                <ScalarProperty Name="IDOrder" ColumnName="IDOrder" />
+                <ScalarProperty Name="NgayDat" ColumnName="NgayDat" />
+                <ScalarProperty Name="IDOrderDetail" ColumnName="IDOrderDetail" />
+                <ScalarProperty Name="Quanity" ColumnName="Quanity" />
                 <ScalarProperty Name="IDKhachHang" ColumnName="IDKhachHang" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="SendText" ColumnName="SendText" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

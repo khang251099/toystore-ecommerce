@@ -1,5 +1,9 @@
 ﻿
-@model IEnumerable<ThuongMaiDienTu.Models.Order>
+@using ThuongMaiDienTu.Models;
+@using PagedList.Mvc;
+@using PagedList;
+@*@model IEnumerable<PhuKienDiDong.Models.Product>*@
+@model PagedList.IPagedList<ThuongMaiDienTu.Models.Order>
 @{
     ViewBag.Title = "ADMIN | Danh sách đơn hàng";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -14,7 +18,7 @@
                 {
                     <div class="col-md-9">
                         @Html.TextBox("search", "", new { placeholder = "Enter something...", @class = "form-control" })
-                    </div>  
+                    </div>
                     <div class="col-md-2">
                         <button type="submit" class="btn btn-danger">Tìm kiếm</button>
                     </div>
@@ -29,26 +33,39 @@
         <a class="btn btn-default" href="@Url.Action("Index", "Order")" style="margin: 30px 0 30px 0">
             Tất cả
         </a>
-        <a class="btn btn-default" href="@Url.Action("UnconfirmedToy", "Order")" style="margin: 30px 0 30px 0">
+        <a class="btn btn-default" href="@Url.Action("SortChuaXacNhan", "Order")" style="margin: 30px 0 30px 0">
             Chưa xác nhận @Html.Action("CountChuaXacnhan", "Order")
         </a>
-        <a class="btn btn-default" href="@Url.Action("ConfirmedToy", "Order")" style="margin: 30px 0 30px 0">
+        <a class="btn btn-default" href="@Url.Action("SortDaXacNhan", "Order")" style="margin: 30px 0 30px 0">
             Đã xác nhận @Html.Action("CountDaXacNhan", "Order")
         </a>
-        <a class="btn btn-default" href="@Url.Action("DangLayHangToy", "Order")" style="margin: 30px 0 30px 0">
+        <a class="btn btn-default" href="@Url.Action("SortDangLayHang", "Order")" style="margin: 30px 0 30px 0">
             Đang lấy hàng @Html.Action("CountDangLayHang", "Order")
         </a>
-        <a class="btn btn-default" href="@Url.Action("DangGiaoToy", "Order")" style="margin: 30px 0 30px 0">
+        <a class="btn btn-default" href="@Url.Action("SortDangGiao", "Order")" style="margin: 30px 0 30px 0">
             Đang giao hàng @Html.Action("CountDangGiao", "Order")
         </a>
-        <a class="btn btn-default" href="@Url.Action("GiaoHangThanhCongToy", "Order")" style="margin: 30px 0 30px 0">
+        <a class="btn btn-default" href="@Url.Action("SortGiaoHangThanhCong", "Order")" style="margin: 30px 0 30px 0">
             Giao hàng thành công @Html.Action("CountGiaoThanhCong", "Order")
         </a>
-        <a class="btn btn-default" href="@Url.Action("CancelToy", "Order")" style="margin: 30px 0 30px 0">
+        <a class="btn btn-default" href="@Url.Action("SortDaHuy", "Order")" style="margin: 30px 0 30px 0">
             Đã hủy
         </a>
 
         <br />
+        @using (Html.BeginForm("Sort", "Order"))
+        {
+            <div class="col-md-3">
+                @Html.RadioButton("sortBy", "Newest", true)<text> Mới nhất</text>
+            </div>
+            <div class="col-md-3">
+                @Html.RadioButton("sortBy", "Oldest")<text> Cũ nhất</text>
+            </div>
+            <div>
+                <button class="btn" style="display: none; margin: auto" type="submit">Lọc</button>
+            </div>
+
+        }
     </div>
 </div>
 <table class="table table-striped table-bordered">
@@ -81,33 +98,33 @@
 
     @foreach (var item in Model)
     {
-<tr>
-    <td>
-        @item.IDOrder
-    </td>
-    <td>
-        @item.NgayDat
-    </td>
-    <td>
-        @item.FullName
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.OrderDetails.Sum(s => s.Quantity).Value)
-    </td>
-    <td>
-        @item.DiaChi_Cus
-    </td>s
-    <td>
-        @item.Status
-    </td>
-    <td>
-        @item.MethodName
-    </td>
-    <td>
-        @item.StatusPayment
-    </td>
-    <td><a class="btn btn-success" href="@Url.Action("Details", "Order", new { id = item.IDOrder })"><i class="fas fa-info-circle"></i></a></td>
-</tr>
+        <tr>
+            <td>
+                @item.IDOrder
+            </td>
+            <td>
+                @item.NgayDat
+            </td>
+            <td>
+                @item.FullName
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderDetails.Sum(s => s.Quantity).Value)
+            </td>
+            <td>
+                @item.DiaChi_Cus
+            </td>s
+            <td>
+                @item.Status
+            </td>
+            <td>
+                @item.MethodName
+            </td>
+            <td>
+                @item.StatusPayment
+            </td>
+            <td><a class="btn btn-success" href="@Url.Action("Details", "Order", new { id = item.IDOrder })"><i class="fas fa-info-circle"></i></a></td>
+        </tr>
     }
     @if (Model.Count() == 0)
     {
@@ -118,5 +135,7 @@
         </tr>
     }
 </table>
-
+<div class="text-center">
+    @Html.PagedListPager(Model, page => Url.Action("Sort", new { page = page }))
+</div>
 </div>

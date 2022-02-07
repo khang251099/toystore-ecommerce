@@ -13,7 +13,7 @@ namespace ThuongMaiDienTu.Controllers
 {
     public class ShoppingCartController : Controller
     {
-        TOYSTORE_MODELEntities7 _db = new TOYSTORE_MODELEntities7();
+        TOYSTORE_MODELEntities3 _db = new TOYSTORE_MODELEntities3();
 
         // GET: ShoppingCart
         public Cart GetCart()

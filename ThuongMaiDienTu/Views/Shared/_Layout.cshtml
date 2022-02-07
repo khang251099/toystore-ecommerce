@@ -63,9 +63,7 @@
         <div class="menu1">
             <div class="container">
                 <div class="row">
-                    @*<div class="col-sm-6">
-                        <span><i class="fas fa-map-marker-alt"></i> Hệ thống cửa hàng Calasu</span> <span>||  <a class="Khung_tron" style="color:black" href="tel://0333826861"><i style="color:black" class="fas fa-phone-volume"></i><span>Hotline: 0333826861</span></a> </span>
-                    </div>*@
+                   
 
                     <ul class="ul_dangkydangnhap">
                         <li><a class="dangnhap_index theodoidonhang" href="~/User/TheoDoiDonHang"><i class="fas fa-truck-moving"></i> Theo dõi đơn hàng</a></li>
@@ -87,6 +85,7 @@
                                     <li></li>
                                     <li><a class="thongtin_user" href="@Url.Action("Details", "User")"><i class="fas fa-user-cog"></i> Thông tin tài khoản</a></li>
                                     <li><a class="LichSuMuaHang" href="@Url.Action("LichSuMuaHang", "User")"><i class="fas fa-user-cog"></i> Lịch sử mua hàng</a></li>
+                                    
                                     <li><a class="dangxuat_user" href="@Url.Action("LogOut", "User")"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
                                 </ul>
                             </li>
@@ -108,7 +107,7 @@
                         <div class="haithea">
                             <a href="" class="nut1">
                                 <i class="fab fa-gratipay fb1"></i>
-                                <span>Sản phẩm yêu thích @Html.Action("BagWishList", "WishList")</span>
+                                <span>Sản phẩm yêu thích @Html.Action("BagWishList", "WishList") </span>
                             </a>
                             <a href="~/ShoppingCart/ShowCart" class="nut2">
                                 <i class="fas fa-shopping-cart fb2"></i>
@@ -168,32 +167,30 @@
         </div>
 
     </section>
-    <div>
+    <!-- Load Facebook SDK for JavaScript -->
+    <div id="fb-root"></div>
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                xfbml: true,
+                version: 'v9.0'
+            });
+        };
 
-        <div id="fb-root"></div>
-        <script>
-            window.fbAsyncInit = function () {
-                FB.init({
-                    xfbml: true,
-                    version: 'v9.0'
-                });
-            };
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
 
-            (function (d, s, id) {
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) return;
-                js = d.createElement(s); js.id = id;
-                js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
-                fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));</script>
-
-        <!-- Your Chat Plugin code -->
-        <div class="fb-customerchat"
-             attribution=setup_tool
-             page_id="102836458355065"
-             theme_color="#0A7CFF">
-        </div>
-
+    <!-- Your Chat Plugin code -->
+    <div class="fb-customerchat"
+         attribution=setup_tool
+         page_id="102836458355065"
+         logged_in_greeting="Calasu Toy xin chào bạn ạ! Bạn có cần tư vấn gì để chúng mình giúp không ạ?"
+         logged_out_greeting="Calasu Toy xin chào bạn ạ! Bạn có cần tư vấn gì để chúng mình giúp không ạ?">
     </div>
 
     @RenderBody()
@@ -224,7 +221,7 @@
                                 <li><a href="~/Home/AllProducts">Sản phẩm</a></li>
                                 <li><a href="#">Thương hiệu</a></li>
                                 <li><a href="~/Home/Contact">Liên hệ</a></li>
-                                @*<li><a href="~/User/OrderHistory">Lịch sử mua hàng</a>*@
+                                <li><a href="~/User/LichSuMuaHangHVL">Lịch sử mua hàng khách hàng vãng lai</a>
 
                             </ul>
                             <ul class="li5 li6">

@@ -11,7 +11,7 @@ namespace ThuongMaiDienTu.Controllers
     public class RatingController : Controller
     {
         // GET: Rating
-        private TOYSTORE_MODELEntities7 _db = new TOYSTORE_MODELEntities7();
+        private TOYSTORE_MODELEntities3 _db = new TOYSTORE_MODELEntities3();
         // GET: Rating
         public ActionResult Index(string search, int? page)
         {

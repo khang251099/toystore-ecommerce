@@ -1,0 +1,58 @@
+﻿@{
+    Layout = null;
+}
+
+
+
+    <div id="container6" style="margin-top: 30px; padding: 30px; background-color: #e8e8e8">
+        <div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto;">
+
+        </div>
+        <div style="text-align: center; margin-top: 20px">
+            Dữ liệu được cập nhật vào lúc @DateTime.Now
+        </div>
+        <script>
+            $(document).ready(function () {
+                $.getJSON("/Products/GetHinhThucThanhToan", function (data) {
+                    Highcharts.chart('container6', {
+                        chart: {
+                            plotBackgroundColor: null,
+                            plotBorderWidth: null,
+                            plotShadow: false,
+                            type: 'pie'
+                        },
+                        title: {
+                            text: 'Tỷ lệ phương thức thanh toán của khách hàng'
+                        },
+                        tooltip: {
+                            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                        },
+                        plotOptions: {
+                            pie: {
+                                allowPointSelect: true,
+                                cursor: 'pointer',
+                                dataLabels: {
+                                    enabled: true,
+                                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                    style: {
+                                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                    }
+                                }
+                            }
+                        },
+                        series: [{
+                            name: 'Loại hình thức thanh toán',
+                            colorByPoint: true,
+                            data: [{
+                                name: 'ShipCOD',
+                                y: data.ShipCOD
+                            }, {
+                                name: 'Paypal',
+                                y: data.Paypal
+                            }]
+                        }]
+                    });
+                });
+            });
+        </script>
+    </div>

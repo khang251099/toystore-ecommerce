@@ -1,0 +1,19 @@
+﻿
+@model IEnumerable<ThuongMaiDienTu.Models.OrderDetail>
+@{
+    Layout = null;
+}
+
+<div class="col-md-3 thumbnail" style="margin: 20px; background-color: #ff0000; color: #fff;height:210px;width:285px">
+    <h3 style="text-align:center; margin-top:20px">Doanh thu một ngày</h3>
+
+    <hr style="margin-top:57px" />
+    @if(@ViewData["DoanhThuMotNgay"]!=null)
+    {<h3 style="text-align:center">@ViewData["DoanhThuMotNgay"] VNĐ</h3> }
+    else
+    {
+    <h3 style="text-align:center">0 VNĐ</h3>
+    }
+
+
+</div>

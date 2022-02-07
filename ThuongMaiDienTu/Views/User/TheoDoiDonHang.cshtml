@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ThuongMaiDienTu.Models.Order>
+﻿@model IEnumerable<ThuongMaiDienTu.Models.OrderDetail>
 
 @{
     ViewBag.Title = "TheoDoiDonHang";
@@ -14,7 +14,7 @@
                 @using (Html.BeginForm("TheoDoiDonHang", "User"))
                 {
                     <div class="col-md-9">
-                        @Html.TextBox("search", "", new { placeholder = "Nhập số điện thoại để theo dõi đơn h", @class = "form-control" })
+                        @Html.TextBox("search", "", new { placeholder = "Nhập số điện thoại để theo dõi đơn hàng", @class = "form-control" })
 
                     </div>
                     <div class="col-md-2">
@@ -45,39 +45,27 @@
         </tr>
         @foreach (var item in Model)
         {
-    <tr>
-        <td>
-            @item.IDOrder
-        </td>
-        <td>
-            @item.ThanhTien
-        </td>
-        <td>
-            @item.NgayDat
-        </td>
-        <td>
-            @item.Status
-        </td>
-        <td>
-            @item.StatusPayment
-        <td>
+            <tr>
+                <td>
+                    @item.IDOrder
+                </td>
+                <td>
+                    @item.Order.ThanhTien
+                </td>
+                <td>
+                    @item.Order.NgayDat
+                </td>
+                <td>
+                    @item.Order.Status
+                </td>
+                <td>
+                    @item.Order.StatusPayment
+                <td>
+     
+                    @Html.ActionLink("Chi tiết đơn hàng", "ChiTietDonHang", new { id = item.IDOrder }, new { @class = "btn btn-success btn-sm" })
 
-            @if (item.Status == "Chưa xác nhận" || item.Status == "Đã xác nhận" || item.Status == "Đang lấy hàng")
-            {@Html.ActionLink("Chi tiết đơn hàng", "ChiTietDonHang", new { id = item.IDOrder }, new { @class = "btn btn-success btn-sm" })
-            @Html.ActionLink("Hủy đơn hàng", "HuyBenTheoDoi", new { id = item.IDOrder }, new { @class = "btn btn-success btn-sm" })
-
-        }
-        else if (item.Status == "Đã hủy" || item.Status == "Giao hàng thành công")
-        {
-            @Html.ActionLink("Chi tiết đơn hàng", "ChiTietDonHang", new { id = item.IDOrder }, new { @class = "btn btn-success btn-sm" })
-        }
-        else if (item.Status == "Đang giao")
-        {
-            @Html.ActionLink("Xác nhận đơn hàng", "XacNhanTheoDoi", new { id = item.IDOrder }, new { @class = "btn btn-warning btn-sm" })
-
-        }
-        </td>
-    </tr>
+                </td>
+            </tr>
         }
 
         @if (Model.Count() == 0)

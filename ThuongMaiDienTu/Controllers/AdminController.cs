@@ -11,7 +11,7 @@ namespace ThuongMaiDienTu.Controllers
     public class AdminController : Controller
     {
         // GET: Admin
-        TOYSTORE_MODELEntities7 _db = new TOYSTORE_MODELEntities7();
+        TOYSTORE_MODELEntities3 _db = new TOYSTORE_MODELEntities3();
 
         //public ActionResult Index()
         //{

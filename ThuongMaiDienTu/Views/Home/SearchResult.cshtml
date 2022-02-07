@@ -15,40 +15,11 @@
                 Không tìm thấy sản phẩm phù hợp
             </div>
 
-            @Html.Action("BestSeller", "Home")
-
-            <div class="row">
-                @Html.Action("Arrival", "Home")
-            </div>
+            
 
 
         }
-        <div class="row">
-            @foreach (var item in Model)
-            {
-                <div class="col-sm-6 col-xs-6 col-md-4">
-                    <div class="product-container">
-                        @if (item.SoLuong == 0)
-                        {<p class="card_men-sold">Sold out</p>}
-                        @if (item.PromotionPrice != null || item.PromotionPrice > 0)
-                        {<div class="product-sale" style="background-color:red;"><span>SALE</span></div>}
-                        <img src="~/Contents/Image/Toy/@item.Images" alt="">
-                        <h3>@item.ProductName</h3>
-                        @if (item.PromotionPrice == null || item.PromotionPrice <= 0)
-                        {
-                            <p>Giá: @item.Gia </p>
-                        }
-                        else
-                        {
-                            <p>Giá: <span style="color:red">@item.PromotionPrice</span>  <strike>@item.Gia</strike>  </p>
-                        }
-                        <a href="~/Home/Detail/@item.IDProduct" class="btn btn-success">Chi tiết</a>
-                        <a onclick="addtocart()" href="/ShoppingCart/AddToCart/@item.IDProduct" class="btn btn-primary">Giỏ hàng</a>
-                    </div>
-                </div>
-            }
-        </div>
-
+       
 
     </div>
 

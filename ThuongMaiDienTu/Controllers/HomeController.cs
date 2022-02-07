@@ -11,10 +11,10 @@ using ThuongMaiDienTu.Models;
 using ThuongMaiDienTu.Models.ViewModel;
 
 namespace ThuongMaiDienTu.Controllers
-{
+{ 
     public class HomeController : Controller
     {
-        TOYSTORE_MODELEntities7 _db = new TOYSTORE_MODELEntities7();
+        TOYSTORE_MODELEntities3 _db = new TOYSTORE_MODELEntities3();
         public ActionResult Index()
         {
             return View(_db.Products.ToList());
@@ -335,7 +335,7 @@ namespace ThuongMaiDienTu.Controllers
             //on successful payment, show success page to user.
             Cart cart = Session["Cart"] as Cart;
             Models.Order _order = TempData["OrderTemp"] as Models.Order;
-
+            _order.StatusPayment = "Thanh toán thành công";
             _db.Orders.Add(_order);
             decimal total = 0;
             foreach (var item in cart.Items)
@@ -398,8 +398,9 @@ namespace ThuongMaiDienTu.Controllers
 
             Cart cart = Session["Cart"] as Cart;
             Models.Order _order = TempData["OrderTemp"] as Models.Order;
+            _order.StatusPayment = "Thanh toán thành công";
             decimal _subtotal = 0;
-          
+            decimal giamGia;
             foreach (var item in cart.Items)
             {
                 decimal tempPrice = 0;
@@ -420,7 +421,7 @@ namespace ThuongMaiDienTu.Controllers
             }
             //if (_order.GiamGia!=null)
             //    _subtotal -= _subtotal*(decimal)_order.GiamGia;
-
+            giamGia = _subtotal * 5 / 100;
             var payer = new Payer()
             {
                 payment_method = "paypal"
@@ -436,7 +437,7 @@ namespace ThuongMaiDienTu.Controllers
             {   
                 tax = (_subtotal * 10/100).ToString("#,##0.00"),
                 shipping = Convert.ToDecimal(_order.PhiShip/(decimal)23000).ToString("#,##0.00"),
-           
+                shipping_discount=giamGia.ToString("#,##0.00"),
                 subtotal = _subtotal.ToString("#,##0.00"),  
                 
             };
@@ -444,7 +445,7 @@ namespace ThuongMaiDienTu.Controllers
             var amount = new Amount()
             {
                 currency = "USD",
-                total = (Convert.ToDecimal(details.tax)+ Convert.ToDecimal(details.shipping)+ Convert.ToDecimal(details.subtotal)).ToString("#,##0.00"), // Total must be equal to sum of tax, shipping and subtotal.  
+                total = (Convert.ToDecimal(details.tax)+ Convert.ToDecimal(details.shipping)+ Convert.ToDecimal(details.subtotal) - Convert.ToDecimal(details.shipping_discount)).ToString("#,##0.00"), // Total must be equal to sum of tax, shipping and subtotal.  
                 details = details
             };
             _order.PaypalAmount = Convert.ToDouble(amount.total);

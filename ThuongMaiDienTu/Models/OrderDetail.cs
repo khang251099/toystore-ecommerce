@@ -14,12 +14,20 @@ namespace ThuongMaiDienTu.Models
     
     public partial class OrderDetail
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public OrderDetail()
+        {
+            this.InComes = new HashSet<InCome>();
+        }
+    
         public int IDOrderDetail { get; set; }
         public Nullable<int> IDOrder { get; set; }
         public Nullable<int> IDProduct { get; set; }
         public Nullable<int> UnitPrice { get; set; }
         public Nullable<int> Quantity { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<InCome> InComes { get; set; }
         public virtual Order Order { get; set; }
         public virtual Product Product { get; set; }
     }

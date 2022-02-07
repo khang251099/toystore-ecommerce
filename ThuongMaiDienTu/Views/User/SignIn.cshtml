@@ -14,7 +14,7 @@
 
 
     <link href="~/Content/bootstrap-4.3.1-dist/css/bootstrap.css" rel="stylesheet" />
-    <link href="~/Content/css/Admin_user_login.css" rel="stylesheet" />
+    <link href="~/Content/css/Admin_user_login1.css" rel="stylesheet" />
     <link href="~/Content/fontawesome-free-5.11.2-web/css/all.css" rel="stylesheet" />
 
     <script src="~/Content/css/index.js"></script>
@@ -23,16 +23,28 @@
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-    
+
 
     <script src="~/Content/jquery-3.4.1.min.js"></script>
     <script src="~/Content/bootstrap-4.3.1-dist/js/bootstrap.js"></script>
 </head>
+
 <body>
+    <div class="">
+        <ol class="breadcrumb">
+            <li>
+                <i class="fas fa-home"></i> <a href="@Url.Action("Index","Home")">Trang chủ</a>
+            </li>
+            <li>
+                <i class="fal fa-sign-in"></i> / Đăng nhập
+            </li>
+        </ol>
+
+    </div>
     <div class="row" style="margin:60px 0">
         <div class="col-sm-12">
             <img class="Hinhnen" src="~/Contents/Image/Banner/BG4.png">
-            <div class="hinhvuong"></div>
+            @*<div class="hinhvuong"></div>*@
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title"><span class="spandangnhap"><i class="glyphicon glyphicon-log-in"></i> </span>Đăng nhập</h3>
@@ -42,7 +54,7 @@
 
 
                         <div class="form-group has-feedback">
-                            <label class="control-label col-md-3 col-sm-3 labelTaikhoan">Tài khoản </label>
+                            <label class="control-label col-md-3 col-sm-3 labelTaikhoan">Địa chỉ email </label>
                             <div class="col-md-9 col-sm-9">
                                 <input class="form-control nhaptaikhoan"
                                        name="Email"
@@ -61,14 +73,17 @@
                                        placeholder="Mật khẩu">
                             </div>
                         </div>
+                        <div>
+                            <div><span>Quên mật khẩu? Khôi phục <a href="~/User/ForgotPassword">tại đây</a></span></div>
+                        </div>
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-8">
                                 <a class="btn btn-danger" href="~/User/Register">Đăng kí</a>
                                 <button type="submit" class="btn btn-primary btnDangnhapUser">
-                                        <span>
-                                             <i class="	glyphicon glyphicon-log-in"></i>
-                                         </span> Đăng nhập
-                                 </button>
+                                    <span>
+                                        <i class="	glyphicon glyphicon-log-in"></i>
+                                    </span> Đăng nhập
+                                </button>
 
                             </div>
 

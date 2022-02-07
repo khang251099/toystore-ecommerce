@@ -13,8 +13,8 @@
         int id = Convert.ToInt32(Session["RankID"]);
         if (id == 1)
         {
-            feeship = 30000;
-            discount = Model.Total_Money() * 0.05;
+            feeship = 23000;
+            discount = 0;
         }
         if (id == 2)
         {
@@ -23,7 +23,6 @@
         }
     }
     double thanhtoan = Model.Total_Money() + feeship + thueVAT - discount;
-
 
 }
 <head>
@@ -37,6 +36,17 @@
             }
         }
     </script>
+    @*<script>
+        $('.method').on('change'), function () {
+            if (this.value ==1)
+            {
+                $('.order').attr('value','Đặt hàng')
+            }
+            if (this.value == "2) {
+                $('.order').attr('value', 'Thanh toán bằng Paypal')
+            }
+        }
+    </script>*@
 </head>
 <body>
     <div class="">
@@ -260,17 +270,16 @@
                                 </div>
                                 <div>
                                     <label>Phương thức thanh toán</label>
-                                    <div class="col-md-10">
+                                    <div class="method">
                                         @Html.DropDownList("IDMethod", null, htmlAttributes: new { @class = "form-control" })
-                                        
                                     </div>
+                                   
                                 </div>
 
                                 <div class="col-sm-3"></div>
-                                <input type="submit" value="Đặt hàng" class=" btn btn-primary" />
+                                <input type="submit" value="Đặt hàng" class="btn btn-primary" />
                             </div>
                         </form>
-
                     }
                 </div>
             }

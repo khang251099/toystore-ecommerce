@@ -13,10 +13,10 @@ namespace ThuongMaiDienTu.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class TOYSTORE_MODELEntities7 : DbContext
+    public partial class TOYSTORE_MODELEntities3 : DbContext
     {
-        public TOYSTORE_MODELEntities7()
-            : base("name=TOYSTORE_MODELEntities7")
+        public TOYSTORE_MODELEntities3()
+            : base("name=TOYSTORE_MODELEntities3")
         {
         }
     
@@ -30,8 +30,9 @@ namespace ThuongMaiDienTu.Models
         public virtual DbSet<Brand> Brands { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<DanhGia> DanhGias { get; set; }
+        public virtual DbSet<ForgotPassword> ForgotPasswords { get; set; }
         public virtual DbSet<GioHang> GioHangs { get; set; }
-        public virtual DbSet<HopThu> HopThus { get; set; }
+        public virtual DbSet<InCome> InComes { get; set; }
         public virtual DbSet<KhachHang> KhachHangs { get; set; }
         public virtual DbSet<LienHe> LienHes { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }

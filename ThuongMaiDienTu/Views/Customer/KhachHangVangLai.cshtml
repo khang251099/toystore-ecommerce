@@ -1,0 +1,125 @@
+﻿@using ThuongMaiDienTu.Models;
+@using PagedList.Mvc;
+@using PagedList;
+@model PagedList.IPagedList<ThuongMaiDienTu.Models.KhachHang>
+
+@{
+    ViewBag.Title = "ADMIN | Danh sách khách hàng";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<script>
+    $(document).ready(function () {
+        $('#dattaTables').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
+    });
+</script>
+<div class="container">
+    <h1>Danh sách khách hàng vãng lai</h1>
+    <div class="row" style="padding: 15px">
+        <div class="col-md-6">
+        </div>
+        <div class="thumbnail col-md-6" style="padding: 30px">
+            @using (Html.BeginForm("Index", "Customer"))
+            {
+                <div class="col-md-9">
+                    @Html.TextBox("search", "", new { placeholder = "Enter something...", @class = "form-control" })
+
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn">Tìm kiếm</button>
+                </div>
+                <div class="col-md-1">
+                    <a class="btn" href="@Url.Action("Index", "Customer")"></a>
+                </div>
+
+            }
+
+        </div>
+        <div class="col-md-12" style="padding-left: 0;">
+            <a class="btn btn-default" href="@Url.Action("Index", "Customer")" style="margin: 30px 0 30px 0">
+                Khách hàng thân thiết
+            </a>
+            <a class="btn btn-default" href="@Url.Action("KhachHangVangLai", "Customer")" style="margin: 30px 0 30px 0">
+                Khách hàng vãng lai
+            </a>
+        </div>
+    </div>
+    <table class="table table-striped table-bordered" id="dataTables">
+        <tr class="bg-info">
+            <th>
+                Mã khách hàng
+            </th>
+            <th>
+                Họ và tên
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Số điện thoại
+            </th>
+            <th>
+                Hạng
+            </th>
+            <th>
+                Số điểm tích lũy
+            </th>
+            @*<th>
+                    Địa chỉ
+                </th>*@
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IDKhachHang)
+
+                </td>
+                <td>
+                    @item.FullName
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @item.Phone_Cus
+                </td>
+                <td>
+                    @if (item.RankID == 1)
+                    {<p>Thường</p>}
+                    else
+                    {
+                        <p>VIP</p>
+                    }
+                </td>
+                <td>
+                    @item.PointKH
+                </td>
+                @*<td>
+                        @item.DiaChi_Cus
+                    </td>*@
+                <td>
+                    @Html.ActionLink("Xem lịch sử đặt hàng", "OrderHistory", new { id = item.IDKhachHang }, new { @class = "btn btn-sm btn-primary" })
+                    @Html.ActionLink("Xem chi tiết", "Details", new { id = item.IDKhachHang }, new { @class = "btn btn-sm btn-success" })
+                </td>
+            </tr>
+        }
+        @if (Model.Count() == 0)
+        {
+            <tr>
+                <td style="text-align: center; background-color: #3366cc; color: white; font-weight: bold;font-size: 20px; padding: 10px;" colspan="9">
+                    Không tìm thấy kết quả phù hợp.
+                </td>
+            </tr>
+        }
+    </table>
+    <div class="text-center">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+    </div>
+</div>

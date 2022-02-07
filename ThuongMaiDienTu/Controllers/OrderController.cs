@@ -11,7 +11,7 @@ namespace ThuongMaiDienTu.Controllers
 {
     public class OrderController : Controller
     {
-        TOYSTORE_MODELEntities7 _db = new TOYSTORE_MODELEntities7();
+        TOYSTORE_MODELEntities3 _db = new TOYSTORE_MODELEntities3();
 
         // GET: Order
         public ActionResult Index(string search, int? page)
@@ -27,8 +27,6 @@ namespace ThuongMaiDienTu.Controllers
                 return View(_db.Orders.Where(s => s.KhachHang.FullName.Contains(search) || s.KhachHang.Email.Contains(search) || s.KhachHang.Phone_Cus == search).ToList().ToPagedList(pageNumber, pageSize));
             }
         }
-       
-
         public ActionResult UnconfirmedToy(string search)
         {
             
@@ -61,7 +59,6 @@ namespace ThuongMaiDienTu.Controllers
 
         }
         
-
         public ActionResult Details(int id)
         {
             var order = _db.OrderDetails.Where(s => s.IDOrder == id).FirstOrDefault();
@@ -156,7 +153,123 @@ namespace ThuongMaiDienTu.Controllers
             ViewData["Number"] = _db.Orders.Where(s => s.Status == "Giao hàng thành công").Count();
             return View();
         }
+        public ActionResult Sort(string sortBy, int? page)
+        {
+            int pageNumber = page ?? 1;
+            int pageSize = 5;
+            if (sortBy == "Newest")
+                return View(_db.Orders.OrderBy(m => m.IDOrder).ToList().ToPagedList(pageNumber, pageSize));
+            else
+                return View(_db.Orders.ToList().ToPagedList(pageNumber, pageSize));
+        }
+        public ActionResult SortGiaoHangThanhCong(DateTime? fromDate, DateTime? toDate)
+        {
+           
+            if (!fromDate.HasValue)
+                fromDate = DateTime.Now.Date;
+            if (!toDate.HasValue)
+                toDate = fromDate.GetValueOrDefault(DateTime.Now.Date).Date.AddDays(1);
+            if (toDate < fromDate)
+                toDate = fromDate.GetValueOrDefault(DateTime.Now.Date).Date.AddDays(1);
+         
+            ViewBag.fromDate = fromDate;
+            ViewBag.toDate = toDate;
+            
+            var day = _db.Orders
+                      .Where(c => c.NgayDat >= fromDate && c.NgayDat < toDate && c.Status=="Giao hàng thành công")
+                      .ToList();
+            return View(day);
+        }
+        public ActionResult SortChuaXacNhan(DateTime? fromDate, DateTime? toDate)
+        {
 
+            if (!fromDate.HasValue)
+                fromDate = DateTime.Now.Date;
+            if (!toDate.HasValue)
+                toDate = fromDate.GetValueOrDefault(DateTime.Now.Date).Date.AddDays(1);
+            if (toDate < fromDate)
+                toDate = fromDate.GetValueOrDefault(DateTime.Now.Date).Date.AddDays(1);
+
+            ViewBag.fromDate = fromDate;
+            ViewBag.toDate = toDate;
+
+            var day = _db.Orders
+                      .Where(c => c.NgayDat >= fromDate && c.NgayDat < toDate && c.Status == "Chưa xác nhận")
+                      .ToList();
+            return View(day);
+        }
+        public ActionResult SortDaXacNhan(DateTime? fromDate, DateTime? toDate)
+        {
+
+            if (!fromDate.HasValue)
+                fromDate = DateTime.Now.Date;
+            if (!toDate.HasValue)
+                toDate = fromDate.GetValueOrDefault(DateTime.Now.Date).Date.AddDays(1);
+            if (toDate < fromDate)
+                toDate = fromDate.GetValueOrDefault(DateTime.Now.Date).Date.AddDays(1);
+
+            ViewBag.fromDate = fromDate;
+            ViewBag.toDate = toDate;
+
+            var day = _db.Orders
+                      .Where(c => c.NgayDat >= fromDate && c.NgayDat < toDate && c.Status == "Đã xác nhận")
+                      .ToList();
+            return View(day);
+        }
+        public ActionResult SortDangLayHang(DateTime? fromDate, DateTime? toDate)
+        {
+
+            if (!fromDate.HasValue)
+                fromDate = DateTime.Now.Date;
+            if (!toDate.HasValue)
+                toDate = fromDate.GetValueOrDefault(DateTime.Now.Date).Date.AddDays(1);
+            if (toDate < fromDate)
+                toDate = fromDate.GetValueOrDefault(DateTime.Now.Date).Date.AddDays(1);
+
+            ViewBag.fromDate = fromDate;
+            ViewBag.toDate = toDate;
+
+            var day = _db.Orders
+                      .Where(c => c.NgayDat >= fromDate && c.NgayDat < toDate && c.Status == "Đang lấy hàng")
+                      .ToList();
+            return View(day);
+        }
+        public ActionResult SortDangGiao(DateTime? fromDate, DateTime? toDate)
+        {
+
+            if (!fromDate.HasValue)
+                fromDate = DateTime.Now.Date;
+            if (!toDate.HasValue)
+                toDate = fromDate.GetValueOrDefault(DateTime.Now.Date).Date.AddDays(1);
+            if (toDate < fromDate)
+                toDate = fromDate.GetValueOrDefault(DateTime.Now.Date).Date.AddDays(1);
+
+            ViewBag.fromDate = fromDate;
+            ViewBag.toDate = toDate;
+
+            var day = _db.Orders
+                      .Where(c => c.NgayDat >= fromDate && c.NgayDat < toDate && c.Status == "Đang giao")
+                      .ToList();
+            return View(day);
+        }
+        public ActionResult SortDaHuy(DateTime? fromDate, DateTime? toDate)
+        {
+
+            if (!fromDate.HasValue)
+                fromDate = DateTime.Now.Date;
+            if (!toDate.HasValue)
+                toDate = fromDate.GetValueOrDefault(DateTime.Now.Date).Date.AddDays(1);
+            if (toDate < fromDate)
+                toDate = fromDate.GetValueOrDefault(DateTime.Now.Date).Date.AddDays(1);
+
+            ViewBag.fromDate = fromDate;
+            ViewBag.toDate = toDate;
+
+            var day = _db.Orders
+                      .Where(c => c.NgayDat >= fromDate && c.NgayDat < toDate && c.Status == "Đã hủy")
+                      .ToList();
+            return View(day);
+        }
 
     }
 }

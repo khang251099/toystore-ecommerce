@@ -21,8 +21,13 @@
                             {
                                 <div class="col-sm-6 col-xs-6 col-md-4">
                                     <div class="product-container">
-                                        @if (item.PromotionPrice != item.Gia)
-                                        { <div class="product-sale" style="background-color:red;"><span>SALE</span></div>}
+                                        @if (item.SoLuong == 0)
+                                        {
+                                            <div class="product-sale" style="background-color:black;"><span>SOLD </span></div>
+                                        }
+                                        else if (item.PromotionPrice != item.Gia)
+                                        {
+                                            <div class="product-sale" style="background-color:red;"><span>SALE</span></div>}
                                         <img src="~/Contents/Image/Toy/@item.Images" alt="">
                                         <h3>@item.ProductName</h3>
                                         @if (item.PromotionPrice == item.Gia || item.PromotionPrice <= 0)
@@ -34,7 +39,12 @@
                                             <p>Giá: <span style="color:red">@item.PromotionPrice</span>  <strike>@item.Gia</strike><a href="/WishList/AddToWishList/@item.IDProduct"><img src="~/Contents/Image/heart.png" style="height:15px;width:15px;"></a>  </p>
                                         }
                                         <a href="~/Home/Detail/@item.IDProduct" class="btn btn-success">Chi tiết</a>
-                                        <a onclick="addtocart()" href="/ShoppingCart/AddToCart/@item.IDProduct" class="btn btn-primary">Giỏ hàng</a>
+                                        @if (item.SoLuong == 0)
+                                        {
+                                            <button disabled class="btn btn-default">Giỏ hàng</button>
+                                        }
+                                        else
+                                        {<a onclick="addtocart()" href="/ShoppingCart/AddToCart/@item.IDProduct" class="btn btn-primary">Giỏ hàng</a>}
                                     </div>
                                 </div>
                             }
